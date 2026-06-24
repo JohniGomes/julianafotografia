@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juliana Brandão Fotografia — Gestão de Campanhas</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg:      #06020d;
+  --gold:    #c9a84c;
+  --gold2:   #e8c96e;
+  --red:     #9b2335;
+  --red2:    #c42a40;
+  --pink:    #ff6b9d;
+  --purple:  #7b2d8b;
+  --text:    #f0e8e0;
+  --muted:   #8a7a70;
+  --green:   #39d98a;
+  --orange:  #f5a623;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(155,35,53,.12) 0%, transparent 70%),
+              radial-gradient(ellipse 50% 40% at 100% 100%, rgba(123,45,139,.1) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── HEADER ── */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 14px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(6,2,13,.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(201,168,76,.15);
+  box-shadow: 0 1px 40px rgba(155,35,53,.15);
+}
+
+.logo { display: flex; align-items: center; gap: 14px; }
+
+.logo-icon {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1.5px solid transparent;
+  background: linear-gradient(var(--bg), var(--bg)) padding-box,
+              linear-gradient(135deg, var(--gold), var(--red2)) border-box;
+  box-shadow: 0 0 16px rgba(201,168,76,.35);
+}
+
+.logo-icon img { width:100%; height:100%; object-fit:cover; object-position:center top; }
+
+.logo-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px; font-weight: 700;
+  background: linear-gradient(90deg, var(--gold2), var(--text));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  letter-spacing: .5px;
+}
+
+.logo-text span {
+  font-size: 10px; color: var(--gold);
+  letter-spacing: 2.5px; text-transform: uppercase; opacity: .7;
+}
+
+nav {
+  display: flex; gap: 2px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(201,168,76,.15);
+  border-radius: 10px; padding: 4px;
+}
+
+nav button {
+  background: none; border: none; cursor: pointer;
+  color: var(--muted); padding: 8px 22px; border-radius: 7px;
+  font: 500 13px 'Inter', sans-serif; letter-spacing: .3px;
+  transition: all .25s;
+}
+
+nav button.active {
+  background: linear-gradient(135deg, var(--red), var(--red2));
+  color: #fff;
+  box-shadow: 0 0 20px rgba(155,35,53,.5);
+}
+
+nav button:hover:not(.active) { background: rgba(255,255,255,.07); color: var(--text); }
+
+/* ── MAIN ── */
+main { position: relative; z-index: 1; padding: 32px 36px; max-width: 1440px; margin: 0 auto; }
+.page { display: none; }
+.page.active { display: block; }
+
+/* ── SECTION HEADER ── */
+.page-header { margin-bottom: 28px; }
+
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px; font-weight: 400;
+  background: linear-gradient(90deg, #fff 30%, var(--gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  line-height: 1.15;
+}
+
+.page-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+/* ── KPI CARDS ── */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px; margin-bottom: 28px;
+}
+
+.kpi-card {
+  position: relative; padding: 22px 20px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid transparent;
+  border-radius: 16px; overflow: hidden;
+  background-clip: padding-box;
+  transition: transform .25s, box-shadow .25s;
+  cursor: default;
+}
+
+.kpi-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 16px; padding: 1px;
+  background: linear-gradient(135deg, rgba(201,168,76,.4), rgba(155,35,53,.2), rgba(201,168,76,.1));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  pointer-events: none;
+}
+
+.kpi-card::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.kpi-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(201,168,76,.1); }
+
+.kpi-glow {
+  position: absolute; width: 80px; height: 80px;
+  border-radius: 50%; opacity: .12; top: -20px; right: -20px;
+  background: radial-gradient(circle, var(--gold), transparent);
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%,100% { opacity:.12; transform: scale(1); }
+  50%      { opacity:.22; transform: scale(1.2); }
+}
+
+.kpi-icon {
+  width: 36px; height: 36px; border-radius: 10px; margin-bottom: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px;
+  background: rgba(201,168,76,.1);
+  border: 1px solid rgba(201,168,76,.2);
+}
+
+.kpi-label {
+  font-size: 10px; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 1.8px; margin-bottom: 8px;
+}
+
+.kpi-value {
+  font-size: 26px; font-weight: 700; color: #fff;
+  line-height: 1; margin-bottom: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.kpi-value.gold { background: linear-gradient(90deg, var(--gold2), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.kpi-value.orange { color: var(--orange); }
+
+.kpi-sub { font-size: 12px; color: var(--muted); }
+
+/* ── CHARTS ── */
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px; margin-bottom: 28px;
+}
+
+.chart-card {
+  background: rgba(255,255,255,.025);
+  border: 1px solid rgba(201,168,76,.12);
+  border-radius: 16px; padding: 22px;
+  position: relative; overflow: hidden;
+  transition: border-color .25s;
+}
+
+.chart-card:hover { border-color: rgba(201,168,76,.3); }
+
+.chart-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(155,35,53,.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.chart-card.wide { grid-column: span 2; }
+
+.chart-title {
+  font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--gold), rgba(201,168,76,.6));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 18px;
+}
+
+/* ── TABLE ── */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; color: #fff;
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+
+.section-title::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, rgba(201,168,76,.4), transparent);
+}
+
+.table-wrap {
+  background: rgba(255,255,255,.025);
+  border: 1px solid rgba(201,168,76,.12);
+  border-radius: 16px; overflow: hidden; margin-bottom: 32px;
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+
+thead th {
+  background: rgba(201,168,76,.06);
+  color: var(--muted); text-align: left;
+  padding: 11px 16px; font-size: 10px;
+  text-transform: uppercase; letter-spacing: 1.2px; font-weight: 600;
+  border-bottom: 1px solid rgba(201,168,76,.12);
+}
+
+tbody tr { border-bottom: 1px solid rgba(255,255,255,.04); transition: background .15s; }
+tbody tr:hover { background: rgba(201,168,76,.04); }
+tbody td { padding: 13px 16px; color: var(--text); }
+
+.badge {
+  display: inline-block; padding: 3px 10px; border-radius: 20px;
+  font-size: 11px; font-weight: 600; letter-spacing: .4px;
+}
+
+.badge-pagante { background: rgba(155,35,53,.2); color: #f08090; border: 1px solid rgba(155,35,53,.4); }
+.badge-permuta { background: rgba(201,168,76,.15); color: var(--gold); border: 1px solid rgba(201,168,76,.3); }
+.badge-plan1 { background: rgba(57,217,138,.15); color: var(--green); }
+.badge-plan2 { background: rgba(155,35,53,.15); color: #f08090; }
+.badge-plan3 { background: rgba(201,168,76,.15); color: var(--gold); }
+
+.text-green { color: var(--green); }
+.text-orange { color: var(--orange); }
+.text-gold { color: var(--gold); }
+.text-muted { color: var(--muted); }
+
+.summary-bar {
+  display: flex; gap: 24px; padding: 14px 18px;
+  background: rgba(201,168,76,.05);
+  border-top: 1px solid rgba(201,168,76,.12);
+  font-size: 13px; flex-wrap: wrap;
+}
+
+.summary-bar span { color: var(--muted); }
+.summary-bar strong { color: var(--gold); margin-left: 6px; }
+
+/* ── FORM ── */
+.form-container { max-width: 840px; }
+
+.form-card {
+  background: rgba(255,255,255,.025);
+  border: 1px solid rgba(201,168,76,.15);
+  border-radius: 16px; padding: 28px; margin-bottom: 22px;
+  position: relative;
+}
+
+.form-card::before {
+  content: '';
+  position: absolute; top: 0; left: 24px; right: 24px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.form-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px; color: #fff;
+  margin-bottom: 20px; padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  display: flex; align-items: center; gap: 10px;
+}
+
+.toggle-group {
+  display: flex; gap: 0;
+  border: 1px solid rgba(201,168,76,.2);
+  border-radius: 10px; overflow: hidden; margin-bottom: 24px; width: fit-content;
+}
+
+.toggle-group button {
+  background: none; border: none; cursor: pointer;
+  color: var(--muted); padding: 10px 30px;
+  font: 500 13px 'Inter', sans-serif; transition: all .2s;
+  border-right: 1px solid rgba(201,168,76,.15);
+}
+
+.toggle-group button:last-child { border-right: none; }
+
+.toggle-group button.active {
+  background: linear-gradient(135deg, var(--red), var(--red2));
+  color: #fff; box-shadow: 0 0 20px rgba(155,35,53,.4);
+}
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-grid.cols3 { grid-template-columns: 1fr 1fr 1fr; }
+.form-group { display: flex; flex-direction: column; gap: 7px; }
+.form-group.span2 { grid-column: span 2; }
+
+label {
+  font-size: 10px; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600;
+}
+
+input, select, textarea {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(201,168,76,.15);
+  color: var(--text); padding: 10px 14px;
+  border-radius: 10px; font: 13px 'Inter', sans-serif;
+  transition: border-color .2s, box-shadow .2s; width: 100%;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: rgba(201,168,76,.5);
+  box-shadow: 0 0 12px rgba(201,168,76,.12);
+}
+
+select option { background: #120810; }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--red), var(--red2));
+  color: #fff; border: none; padding: 13px 34px;
+  border-radius: 10px; font: 600 13px 'Inter', sans-serif;
+  cursor: pointer; letter-spacing: .5px;
+  box-shadow: 0 0 24px rgba(155,35,53,.35);
+  transition: box-shadow .2s, transform .15s;
+}
+
+.btn-primary:hover { box-shadow: 0 0 36px rgba(155,35,53,.6); transform: translateY(-2px); }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-ghost {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(201,168,76,.2);
+  color: var(--muted); padding: 10px 22px; border-radius: 10px;
+  font: 13px 'Inter', sans-serif; cursor: pointer; transition: all .2s;
+}
+
+.btn-ghost:hover { border-color: rgba(201,168,76,.5); color: var(--text); }
+
+.btn-danger {
+  background: rgba(155,35,53,.12); color: #f08090;
+  border: 1px solid rgba(155,35,53,.25);
+  padding: 5px 12px; border-radius: 7px; font-size: 12px; cursor: pointer;
+  transition: all .2s;
+}
+
+.btn-danger:hover { background: rgba(155,35,53,.3); }
+
+.form-actions { display: flex; gap: 12px; align-items: center; margin-top: 6px; }
+.divider { height: 1px; background: rgba(255,255,255,.06); margin: 20px 0; }
+#permuta-fields { display: none; }
+#permuta-extra-fields { display: none; }
+
+.filter-bar {
+  display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; align-items: center;
+}
+
+.filter-bar input, .filter-bar select {
+  width: auto; min-width: 160px; padding: 8px 12px; font-size: 12px;
+}
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 32px; right: 32px;
+  padding: 14px 24px; border-radius: 12px;
+  font: 500 14px 'Inter', sans-serif;
+  z-index: 999; display: none;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 4px 32px rgba(0,0,0,.5);
+  animation: toastIn .3s ease;
+}
+
+@keyframes toastIn {
+  from { transform: translateY(16px) scale(.95); opacity: 0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.empty-state { text-align: center; padding: 52px; color: var(--muted); }
+.empty-state div { font-size: 36px; margin-bottom: 12px; }
+
+/* ── COUNTER ANIMATION ── */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.kpi-value { animation: countUp .5s ease both; }
+
+canvas { max-width: 100%; }
+
+@media (max-width: 900px) {
+  .charts-grid { grid-template-columns: 1fr; }
+  .chart-card.wide { grid-column: span 1; }
+  .form-grid, .form-grid.cols3 { grid-template-columns: 1fr; }
+  .form-group.span2 { grid-column: span 1; }
+  header { flex-direction: column; gap: 12px; }
+  main { padding: 16px 18px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">
+      <img src="data:image/jpeg;base64,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" alt="Juliana Brandão">
+    </div>
+    <div class="logo-text">
+      <h1>Juliana Brandão</h1>
+      <span>Fotografia · Gestão de Campanhas</span>
+    </div>
+  </div>
+  <nav>
+    <button class="active" onclick="goTo('dashboard')">Dashboard</button>
+    <button onclick="goTo('lancamento')">Lançamentos</button>
+    <button onclick="goTo('historico')">Histórico</button>
+  </nav>
+</header>
+
+<main>
+
+<!-- ══ DASHBOARD ══ -->
+<div id="page-dashboard" class="page active">
+  <div class="page-header">
+    <p class="page-title">Visão Geral da Campanha</p>
+    <p class="page-sub" id="dash-periodo">—</p>
+  </div>
+
+  <div class="kpi-grid" id="kpi-grid"></div>
+
+  <div class="charts-grid">
+    <div class="chart-card wide">
+      <div class="chart-title">Faturamento por Plano</div>
+      <canvas id="chart-plano" height="170"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Pagantes vs Permuta</div>
+      <canvas id="chart-tipo" height="170"></canvas>
+    </div>
+    <div class="chart-card wide">
+      <div class="chart-title">Faturamento por Cliente</div>
+      <canvas id="chart-clientes" height="200"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Distribuição de Álbuns</div>
+      <canvas id="chart-album" height="170"></canvas>
+    </div>
+  </div>
+
+  <div class="section-title">Últimos Lançamentos</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th><th>Cliente</th><th>Tipo</th><th>Plano</th>
+          <th>Fotos Extras</th><th>Álbum</th><th>Total</th><th>A Receber</th>
+        </tr>
+      </thead>
+      <tbody id="dash-table"></tbody>
+    </table>
+    <div class="summary-bar" id="dash-summary"></div>
+  </div>
+</div>
+
+<!-- ══ LANÇAMENTO ══ -->
+<div id="page-lancamento" class="page">
+  <div class="page-header">
+    <p class="page-title">Novo Lançamento</p>
+    <p class="page-sub">Cadastre um cliente pagante ou de permuta</p>
+  </div>
+  <div class="form-container">
+    <div class="form-card">
+      <div style="margin-bottom:20px;">
+        <label style="display:block;margin-bottom:10px;">Tipo de Cliente</label>
+        <div class="toggle-group">
+          <button class="active" id="btn-pagante" onclick="setTipo('pagante')">💰 Pagante</button>
+          <button id="btn-permuta" onclick="setTipo('permuta')">🤝 Permuta</button>
+        </div>
+      </div>
+
+      <div class="form-card-title">👤 Dados do Cliente</div>
+      <div class="form-grid">
+        <div class="form-group span2">
+          <label>Nome do Cliente *</label>
+          <input type="text" id="f-nome" placeholder="Ex: Maria Silva" />
+        </div>
+        <div class="form-group">
+          <label>Data / Hora</label>
+          <input type="datetime-local" id="f-data" />
+        </div>
+        <div class="form-group" id="permuta-fields">
+          <label>Tipo de Permuta</label>
+          <input type="text" id="f-permuta-tipo" placeholder="Ex: DOCES, MAKE, PAPELARIA..." />
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="form-card-title">📋 Pacote Contratado</div>
+      <div class="form-grid cols3">
+        <div class="form-group">
+          <label>Plano</label>
+          <select id="f-plano">
+            <option value="1">Plano 1</option>
+            <option value="2" selected>Plano 2</option>
+            <option value="3">Plano 3</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Lote</label>
+          <input type="number" id="f-lote" value="1" min="1" />
+        </div>
+        <div class="form-group">
+          <label>Valor do Pacote (R$)</label>
+          <input type="number" id="f-valor-pct" placeholder="Ex: 1300" />
+        </div>
+        <div class="form-group">
+          <label>Entrada (R$)</label>
+          <input type="number" id="f-entrada" placeholder="Ex: 1300" />
+        </div>
+        <div class="form-group">
+          <label>Qtd. Fotos do Pacote</label>
+          <input type="number" id="f-fotos-pct" placeholder="Ex: 20" />
+        </div>
+        <div class="form-group">
+          <label>Fotos Extras Vendidas</label>
+          <input type="number" id="f-fotos-extras" placeholder="Ex: 10" min="0" value="0" />
+        </div>
+        <div class="form-group">
+          <label>Fotos de Presente</label>
+          <input type="number" id="f-fotos-presente" placeholder="Ex: 2" min="0" value="0" />
+        </div>
+        <div class="form-group">
+          <label>Valor Venda Fotos Extras (R$)</label>
+          <input type="number" id="f-valor-extras" placeholder="Ex: 500" min="0" value="0" />
+        </div>
+        <div class="form-group">
+          <label>Custo de Ensaio (R$)</label>
+          <input type="number" id="f-custo-ensaio" placeholder="Ex: 0" min="0" value="0" />
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="form-card-title">📚 Álbum</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Álbum Contratado</label>
+          <input type="text" id="f-album" placeholder="Ex: 10L, 20x20, Nenhum" />
+        </div>
+        <div class="form-group">
+          <label>Valor do Álbum (R$)</label>
+          <input type="number" id="f-valor-album" placeholder="Ex: 580" min="0" value="0" />
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div id="permuta-extra-fields">
+        <div class="form-card-title">🔄 Dados da Permuta</div>
+        <div class="form-grid cols3">
+          <div class="form-group">
+            <label>Total Gasto pelo Cliente (R$)</label>
+            <input type="number" id="f-total-cliente" placeholder="Ex: 2980" min="0" value="0" />
+          </div>
+          <div class="form-group">
+            <label>Total Feito na Permuta (R$)</label>
+            <input type="number" id="f-total-permuta" placeholder="Ex: 1900" min="0" value="0" />
+          </div>
+          <div class="form-group">
+            <label>Pagamento Extra Fora da Permuta (R$)</label>
+            <input type="number" id="f-pagamento-extra" placeholder="Ex: 1080" min="0" value="0" />
+          </div>
+        </div>
+        <div class="divider"></div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn-primary" onclick="salvarLancamento()">✓ Salvar Lançamento</button>
+        <button class="btn-ghost" onclick="limparForm()">Limpar</button>
+        <span id="total-preview" style="margin-left:auto;font-size:13px;color:var(--muted);"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ HISTÓRICO ══ -->
+<div id="page-historico" class="page">
+  <div class="page-header">
+    <p class="page-title">Histórico Completo</p>
+    <p class="page-sub">Todos os lançamentos registrados</p>
+  </div>
+
+  <div class="filter-bar">
+    <input type="text" id="filtro-nome" placeholder="🔍 Buscar cliente..." oninput="renderHistorico()" />
+    <select id="filtro-tipo" onchange="renderHistorico()">
+      <option value="">Todos os tipos</option>
+      <option value="pagante">Pagante</option>
+      <option value="permuta">Permuta</option>
+    </select>
+    <select id="filtro-plano" onchange="renderHistorico()">
+      <option value="">Todos os planos</option>
+      <option value="1">Plano 1</option>
+      <option value="2">Plano 2</option>
+      <option value="3">Plano 3</option>
+    </select>
+    <button class="btn-ghost" onclick="exportarCSV()" style="margin-left:auto;">↓ Exportar CSV</button>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th><th>Cliente</th><th>Data</th><th>Tipo</th><th>Plano</th>
+          <th>Valor PCT</th><th>Entrada</th><th>Fotos Extras</th><th>Álbum</th>
+          <th>Total</th><th>A Receber</th><th></th>
+        </tr>
+      </thead>
+      <tbody id="hist-table"></tbody>
+    </table>
+    <div class="summary-bar" id="hist-summary"></div>
+  </div>
+</div>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+Chart.register(ChartDataLabels);
+
+// ════ DATA ════
+const STORAGE_KEY = 'jb_fotografia_v1';
+
+const SEED_DATA = [
+  { id:1,  tipo:'pagante', nome:'Luiza Bicalho',       data:'2025-01-15T10:00', plano:2, lote:1, valorPct:1300, entrada:1300, fotosExt:10, fotosPresente:6,  valorExtras:500,  album:'',           valorAlbum:0,   custoEnsaio:0, totalPermuta:0,    pagamentoExtra:0,   tipoPermuta:'' },
+  { id:2,  tipo:'pagante', nome:'Sandrine Beatrice',   data:'2025-01-18T14:00', plano:2, lote:1, valorPct:1300, entrada:1300, fotosExt:13, fotosPresente:0,  valorExtras:650,  album:'20x20 - 10L',valorAlbum:580, custoEnsaio:0, totalPermuta:0,    pagamentoExtra:0,   tipoPermuta:'' },
+  { id:3,  tipo:'pagante', nome:'Sara Bruno',          data:'2025-01-20T09:00', plano:1, lote:1, valorPct:800,  entrada:800,  fotosExt:16, fotosPresente:2,  valorExtras:800,  album:'',           valorAlbum:0,   custoEnsaio:0, totalPermuta:0,    pagamentoExtra:0,   tipoPermuta:'' },
+  { id:4,  tipo:'pagante', nome:'Família Bessa',       data:'2025-01-22T11:00', plano:3, lote:1, valorPct:1900, entrada:1900, fotosExt:20, fotosPresente:2,  valorExtras:1000, album:'2UN 10L',    valorAlbum:1116,custoEnsaio:0, totalPermuta:0,    pagamentoExtra:0,   tipoPermuta:'' },
+  { id:5,  tipo:'pagante', nome:'Michelle de Souza',   data:'2025-01-25T15:00', plano:3, lote:1, valorPct:1900, entrada:0,    fotosExt:0,  fotosPresente:0,  valorExtras:0,    album:'10L',        valorAlbum:580, custoEnsaio:0, totalPermuta:0,    pagamentoExtra:0,   tipoPermuta:'' },
+  { id:6,  tipo:'pagante', nome:'Geiziane Correa',     data:'2025-01-28T10:00', plano:2, lote:1, valorPct:1300, entrada:1300, fotosExt:14, fotosPresente:0,  valorExtras:700,  album:'10L',        valorAlbum:580, custoEnsaio:0, totalPermuta:0,    pagamentoExtra:0,   tipoPermuta:'' },
+  { id:7,  tipo:'pagante', nome:'Gabriela Ferreira',   data:'2025-02-01T09:00', plano:2, lote:1, valorPct:1300, entrada:1300, fotosExt:7,  fotosPresente:0,  valorExtras:399,  album:'',           valorAlbum:0,   custoEnsaio:0, totalPermuta:0,    pagamentoExtra:0,   tipoPermuta:'' },
+  { id:8,  tipo:'pagante', nome:'Gabriela Baroni',     data:'2025-02-03T14:00', plano:2, lote:1, valorPct:1300, entrada:1300, fotosExt:19, fotosPresente:0,  valorExtras:950,  album:'',           valorAlbum:0,   custoEnsaio:0, totalPermuta:0,    pagamentoExtra:0,   tipoPermuta:'' },
+  { id:9,  tipo:'pagante', nome:'Clarissa Pacheci',    data:'2025-02-05T10:00', plano:2, lote:1, valorPct:1300, entrada:0,    fotosExt:0,  fotosPresente:2,  valorExtras:0,    album:'',           valorAlbum:0,   custoEnsaio:0, totalPermuta:0,    pagamentoExtra:0,   tipoPermuta:'' },
+  { id:10, tipo:'pagante', nome:'Leandra',             data:'2025-02-08T11:00', plano:2, lote:1, valorPct:1300, entrada:1300, fotosExt:10, fotosPresente:2,  valorExtras:500,  album:'10L',        valorAlbum:580, custoEnsaio:0, totalPermuta:0,    pagamentoExtra:0,   tipoPermuta:'' },
+  { id:11, tipo:'permuta', nome:'Amanda Cristina',     data:'2025-01-16T10:00', plano:3, lote:1, valorPct:1900, entrada:1900, fotosExt:10, fotosPresente:1,  valorExtras:500,  album:'10L',        valorAlbum:580, custoEnsaio:0, totalPermuta:1900, pagamentoExtra:1080,tipoPermuta:'BUNDA' },
+  { id:12, tipo:'permuta', nome:'Priscila Carlesso',   data:'2025-01-19T09:00', plano:2, lote:1, valorPct:1300, entrada:1300, fotosExt:13, fotosPresente:0,  valorExtras:650,  album:'',           valorAlbum:0,   custoEnsaio:0, totalPermuta:1300, pagamentoExtra:650, tipoPermuta:'DOCES' },
+  { id:13, tipo:'permuta', nome:'Natalia Stephany',    data:'2025-01-21T14:00', plano:1, lote:1, valorPct:800,  entrada:800,  fotosExt:7,  fotosPresente:1,  valorExtras:399,  album:'',           valorAlbum:0,   custoEnsaio:0, totalPermuta:800,  pagamentoExtra:399, tipoPermuta:'DOCES' },
+  { id:14, tipo:'permuta', nome:'Wanessa Timoteo',     data:'2025-01-23T11:00', plano:2, lote:1, valorPct:1300, entrada:1300, fotosExt:6,  fotosPresente:0,  valorExtras:342,  album:'',           valorAlbum:0,   custoEnsaio:0, totalPermuta:1300, pagamentoExtra:342, tipoPermuta:'PAPELARIA' },
+  { id:15, tipo:'permuta', nome:'Morgana Pertel',      data:'2025-01-26T15:00', plano:2, lote:1, valorPct:1300, entrada:1300, fotosExt:11, fotosPresente:1,  valorExtras:550,  album:'',           valorAlbum:0,   custoEnsaio:0, totalPermuta:1300, pagamentoExtra:550, tipoPermuta:'PAPELARIA' },
+  { id:16, tipo:'permuta', nome:'Kessiane',            data:'2025-01-29T10:00', plano:2, lote:1, valorPct:1300, entrada:1300, fotosExt:19, fotosPresente:0,  valorExtras:950,  album:'10L',        valorAlbum:580, custoEnsaio:0, totalPermuta:2830, pagamentoExtra:0,   tipoPermuta:'CONSTRUÇÃO' },
+  { id:17, tipo:'permuta', nome:'Cinthia Bassini',     data:'2025-02-02T09:00', plano:2, lote:1, valorPct:1300, entrada:1300, fotosExt:2,  fotosPresente:1,  valorExtras:114,  album:'',           valorAlbum:0,   custoEnsaio:0, totalPermuta:1414, pagamentoExtra:0,   tipoPermuta:'ARTE EM PAPEL' },
+  { id:18, tipo:'permuta', nome:'Glauciane (GeG Cakes)',data:'2025-02-04T14:00',plano:2, lote:1, valorPct:1300, entrada:1300, fotosExt:7,  fotosPresente:2,  valorExtras:350,  album:'',           valorAlbum:0,   custoEnsaio:0, totalPermuta:1650, pagamentoExtra:0,   tipoPermuta:'GeG CAKES' },
+  { id:19, tipo:'permuta', nome:'Rayssa',              data:'2025-02-07T11:00', plano:2, lote:1, valorPct:1300, entrada:1300, fotosExt:8,  fotosPresente:4,  valorExtras:400,  album:'',           valorAlbum:0,   custoEnsaio:0, totalPermuta:1300, pagamentoExtra:400, tipoPermuta:'MAKE' },
+];
+
+function getData() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) { localStorage.setItem(STORAGE_KEY, JSON.stringify(SEED_DATA)); return SEED_DATA; }
+  return JSON.parse(raw);
+}
+
+function saveData(d) { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
+function calcTotal(r) { return (r.valorPct||0) + (r.valorExtras||0) + (r.valorAlbum||0); }
+function calcReceber(r) { return calcTotal(r) - (r.entrada||0); }
+
+// ════ NAV ════
+function goTo(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('onclick').includes(page));
+  });
+  if (page === 'dashboard') renderDashboard();
+  if (page === 'historico') renderHistorico();
+}
+
+// ════ DASHBOARD ════
+const charts = {};
+
+function renderDashboard() {
+  const data = getData();
+  const pagantes = data.filter(r => r.tipo === 'pagante');
+  const permutas  = data.filter(r => r.tipo === 'permuta');
+  const totalFat  = data.reduce((s,r) => s + calcTotal(r), 0);
+  const totalRec  = data.reduce((s,r) => s + calcReceber(r), 0);
+  const totalExt  = data.reduce((s,r) => s + (r.fotosExt||0), 0);
+  const ticketMed = data.length > 0 ? totalFat / data.length : 0;
+  const albumVend = data.filter(r => r.album && r.album !== '' && r.album !== 'Nenhum').length;
+
+  document.getElementById('dash-periodo').textContent =
+    `${data.length} lançamentos registrados — atualizado agora`;
+
+  document.getElementById('kpi-grid').innerHTML = `
+    ${kpi('Faturamento Total', fmt(totalFat), `${data.length} clientes`, '💰', 'gold')}
+    ${kpi('A Receber', fmt(totalRec), `${pagantes.filter(r=>calcReceber(r)>0).length} pendentes`, '⏳', totalRec>0?'orange':'')}
+    ${kpi('Ticket Médio', fmt(ticketMed), 'por ensaio', '📊')}
+    ${kpi('Clientes Pagantes', pagantes.length, `${permutas.length} permutas`, '👥')}
+    ${kpi('Fotos Extras', totalExt, `Média ${(totalExt/Math.max(data.length,1)).toFixed(1)}/cliente`, '📸')}
+    ${kpi('Álbuns Vendidos', albumVend, `R$ ${data.reduce((s,r)=>s+(r.valorAlbum||0),0).toLocaleString('pt-BR')} total`, '📚')}
+  `;
+
+  // Charts
+  const planos = {1:0,2:0,3:0};
+  data.forEach(r => planos[r.plano] = (planos[r.plano]||0) + calcTotal(r));
+  drawBar('chart-plano', ['Plano 1','Plano 2','Plano 3'],
+    [planos[1]||0, planos[2]||0, planos[3]||0],
+    ['#39d98a','#9b2335','#c9a84c']);
+
+  drawDoughnut('chart-tipo',
+    ['Pagantes','Permuta'],
+    [pagantes.reduce((s,r)=>s+calcTotal(r),0), permutas.reduce((s,r)=>s+calcTotal(r),0)],
+    ['#9b2335','#c9a84c']);
+
+  const sorted = [...data].sort((a,b)=>calcTotal(b)-calcTotal(a)).slice(0,12);
+  drawBar('chart-clientes',
+    sorted.map(r => r.nome.split(' ')[0]),
+    sorted.map(r => calcTotal(r)),
+    sorted.map(r => r.tipo==='pagante' ? '#9b2335' : '#c9a84c'));
+
+  const albumTypes = {};
+  data.filter(r=>r.album&&r.album!=='').forEach(r => { albumTypes[r.album]=(albumTypes[r.album]||0)+1; });
+  if (!Object.keys(albumTypes).length) albumTypes['Sem álbum'] = data.length;
+  drawDoughnut('chart-album', Object.keys(albumTypes), Object.values(albumTypes),
+    ['#9b2335','#c9a84c','#39d98a','#f5a623','#7b2d8b','#ff6b9d']);
+
+  // Table
+  const recent = [...data].slice(-8).reverse();
+  document.getElementById('dash-table').innerHTML = recent.map((r,i) => `
+    <tr>
+      <td class="text-muted">${i+1}</td>
+      <td><strong>${r.nome}</strong></td>
+      <td><span class="badge badge-${r.tipo}">${r.tipo==='pagante'?'Pagante':'Permuta'}</span></td>
+      <td><span class="badge badge-plan${r.plano}">Plano ${r.plano}</span></td>
+      <td>${r.fotosExt||0} fotos</td>
+      <td>${r.album||'—'}</td>
+      <td class="text-gold"><strong>${fmt(calcTotal(r))}</strong></td>
+      <td class="${calcReceber(r)>0?'text-orange':'text-green'}">${calcReceber(r)>0?fmt(calcReceber(r)):'✓ Quitado'}</td>
+    </tr>`).join('');
+
+  document.getElementById('dash-summary').innerHTML = `
+    <span>Total:</span><strong>${fmt(totalFat)}</strong>
+    <span style="margin-left:16px;">A receber:</span><strong style="color:var(--orange)">${fmt(totalRec)}</strong>
+    <span style="margin-left:16px;">Clientes:</span><strong>${data.length}</strong>
+  `;
+}
+
+function kpi(label, value, sub, icon, cls='') {
+  return `<div class="kpi-card">
+    <div class="kpi-glow"></div>
+    <div class="kpi-icon">${icon}</div>
+    <div class="kpi-label">${label}</div>
+    <div class="kpi-value ${cls}">${value}</div>
+    <div class="kpi-sub">${sub}</div>
+  </div>`;
+}
+
+function fmt(v) {
+  return 'R$ ' + (v||0).toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0});
+}
+
+// Gradient helper
+function makeGradient(ctx, colorTop, colorBot) {
+  const g = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
+  g.addColorStop(0, colorTop);
+  g.addColorStop(1, colorBot);
+  return g;
+}
+
+function drawBar(id, labels, values, colors) {
+  if (charts[id]) charts[id].destroy();
+  const canvas = document.getElementById(id);
+  const ctx = canvas.getContext('2d');
+
+  // Build per-bar gradients
+  const bgColors = colors.map(c => {
+    const g = ctx.createLinearGradient(0, 0, 0, canvas.height * .8);
+    g.addColorStop(0, c + 'ff');
+    g.addColorStop(1, c + '22');
+    return g;
+  });
+
+  charts[id] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        data: values,
+        backgroundColor: bgColors,
+        borderColor: colors,
+        borderWidth: 1.5,
+        borderRadius: 8,
+        borderSkipped: false,
+      }]
+    },
+    options: {
+      responsive: true,
+      animation: { duration: 1200, easing: 'easeOutQuart' },
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end', align: 'end',
+          color: '#c9a84c',
+          font: { size: 11, weight: '700' },
+          formatter: v => v > 0 ? 'R$' + v.toLocaleString('pt-BR') : '',
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#8a7a70', font: { size: 11 } },
+          grid: { color: 'rgba(255,255,255,.04)' },
+          border: { color: 'rgba(255,255,255,.06)' }
+        },
+        y: {
+          ticks: { color: '#8a7a70', callback: v => 'R$'+v.toLocaleString('pt-BR'), font:{size:10} },
+          grid: { color: 'rgba(255,255,255,.04)' },
+          border: { color: 'rgba(255,255,255,.06)' }
+        }
+      },
+      layout: { padding: { top: 24 } }
+    }
+  });
+}
+
+function drawDoughnut(id, labels, values, colors) {
+  if (charts[id]) charts[id].destroy();
+  const ctx = document.getElementById(id).getContext('2d');
+  const total = values.reduce((s,v)=>s+v,0);
+
+  charts[id] = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels,
+      datasets: [{
+        data: values,
+        backgroundColor: colors.map(c => c + 'cc'),
+        borderColor: colors,
+        borderWidth: 1.5,
+        hoverOffset: 10,
+      }]
+    },
+    options: {
+      responsive: true,
+      animation: { duration: 1400, easing: 'easeOutQuart', animateRotate: true, animateScale: true },
+      plugins: {
+        legend: { position:'bottom', labels:{ color:'#8a7a70', font:{size:11}, padding:14, usePointStyle:true } },
+        datalabels: {
+          color: '#fff',
+          font: { size: 11, weight: '700' },
+          formatter: (v) => {
+            const pct = total > 0 ? Math.round(v/total*100) : 0;
+            return pct >= 5 ? pct + '%' : '';
+          }
+        }
+      },
+      cutout: '62%',
+    }
+  });
+}
+
+// ════ FORM ════
+let tipoAtual = 'pagante';
+
+function setTipo(t) {
+  tipoAtual = t;
+  document.getElementById('btn-pagante').classList.toggle('active', t==='pagante');
+  document.getElementById('btn-permuta').classList.toggle('active', t==='permuta');
+  document.getElementById('permuta-fields').style.display = t==='permuta'?'block':'none';
+  document.getElementById('permuta-extra-fields').style.display = t==='permuta'?'block':'none';
+}
+
+function g(id) { return document.getElementById(id).value; }
+function n(id) { return parseFloat(document.getElementById(id).value)||0; }
+
+function salvarLancamento() {
+  const nome = g('f-nome').trim();
+  if (!nome) { showToast('Informe o nome do cliente', 'error'); return; }
+
+  const data = getData();
+  const newId = data.length > 0 ? Math.max(...data.map(r=>r.id)) + 1 : 1;
+
+  data.push({
+    id: newId, tipo: tipoAtual, nome,
+    data: g('f-data'), plano: parseInt(g('f-plano')), lote: parseInt(g('f-lote'))||1,
+    valorPct: n('f-valor-pct'), entrada: n('f-entrada'),
+    fotosExt: n('f-fotos-extras'), fotosPresente: n('f-fotos-presente'),
+    valorExtras: n('f-valor-extras'), album: g('f-album').trim(),
+    valorAlbum: n('f-valor-album'), custoEnsaio: n('f-custo-ensaio'),
+    tipoPermuta: tipoAtual==='permuta' ? g('f-permuta-tipo').trim() : '',
+    totalPermuta: tipoAtual==='permuta' ? n('f-total-permuta') : 0,
+    pagamentoExtra: tipoAtual==='permuta' ? n('f-pagamento-extra') : 0,
+  });
+
+  saveData(data);
+  showToast(`✓ ${nome} registrada com sucesso!`);
+  limparForm();
+}
+
+function limparForm() {
+  ['f-nome','f-data','f-permuta-tipo','f-album'].forEach(id => document.getElementById(id).value='');
+  ['f-valor-pct','f-entrada','f-fotos-extras','f-fotos-presente','f-valor-extras',
+   'f-custo-ensaio','f-valor-album','f-total-cliente','f-total-permuta','f-pagamento-extra']
+    .forEach(id => { const el=document.getElementById(id); if(el) el.value=0; });
+  document.getElementById('f-plano').value='2';
+  document.getElementById('f-lote').value='1';
+  document.getElementById('total-preview').textContent='';
+}
+
+['f-valor-pct','f-valor-extras','f-valor-album'].forEach(id => {
+  document.getElementById(id)?.addEventListener('input', () => {
+    const t = n('f-valor-pct') + n('f-valor-extras') + n('f-valor-album');
+    document.getElementById('total-preview').textContent = 'Total: ' + fmt(t);
+  });
+});
+
+// ════ HISTÓRICO ════
+function renderHistorico() {
+  const data = getData();
+  const nome  = document.getElementById('filtro-nome').value.toLowerCase();
+  const tipo  = document.getElementById('filtro-tipo').value;
+  const plano = document.getElementById('filtro-plano').value;
+
+  const filtered = data.filter(r => {
+    if (nome  && !r.nome.toLowerCase().includes(nome)) return false;
+    if (tipo  && r.tipo !== tipo) return false;
+    if (plano && String(r.plano) !== plano) return false;
+    return true;
+  });
+
+  if (!filtered.length) {
+    document.getElementById('hist-table').innerHTML =
+      `<tr><td colspan="12"><div class="empty-state"><div>📭</div>Nenhum lançamento encontrado</div></td></tr>`;
+    document.getElementById('hist-summary').innerHTML = '';
+    return;
+  }
+
+  document.getElementById('hist-table').innerHTML = filtered.map((r,i) => {
+    const total = calcTotal(r);
+    const rec   = calcReceber(r);
+    const dt    = r.data ? new Date(r.data).toLocaleDateString('pt-BR') : '—';
+    return `<tr>
+      <td class="text-muted">${i+1}</td>
+      <td><strong>${r.nome}</strong>${r.tipoPermuta?`<br><small class="text-muted">${r.tipoPermuta}</small>`:''}</td>
+      <td class="text-muted">${dt}</td>
+      <td><span class="badge badge-${r.tipo}">${r.tipo==='pagante'?'Pagante':'Permuta'}</span></td>
+      <td><span class="badge badge-plan${r.plano}">Plano ${r.plano}</span></td>
+      <td>${fmt(r.valorPct)}</td>
+      <td>${r.entrada>0?fmt(r.entrada):'<span class="text-orange">—</span>'}</td>
+      <td>${r.fotosExt||0} foto${r.fotosExt!==1?'s':''}</td>
+      <td>${r.album||'—'}</td>
+      <td class="text-gold"><strong>${fmt(total)}</strong></td>
+      <td class="${rec>0?'text-orange':'text-green'}">${rec>0?fmt(rec):'✓'}</td>
+      <td><button class="btn-danger" onclick="excluir(${r.id})">✕</button></td>
+    </tr>`;
+  }).join('');
+
+  const totFat = filtered.reduce((s,r)=>s+calcTotal(r),0);
+  const totRec = filtered.reduce((s,r)=>s+calcReceber(r),0);
+  document.getElementById('hist-summary').innerHTML = `
+    <span>Exibindo ${filtered.length} registros</span>
+    <span style="margin-left:16px;">Total:</span><strong>${fmt(totFat)}</strong>
+    <span style="margin-left:16px;">A receber:</span><strong style="color:var(--orange)">${fmt(totRec)}</strong>
+  `;
+}
+
+function excluir(id) {
+  if (!confirm('Remover este lançamento?')) return;
+  saveData(getData().filter(r => r.id !== id));
+  renderHistorico();
+  showToast('Lançamento removido');
+}
+
+function exportarCSV() {
+  const data = getData();
+  const cols = ['id','tipo','nome','data','plano','lote','valorPct','entrada','fotosExt','fotosPresente','valorExtras','album','valorAlbum','total','aReceber','tipoPermuta'];
+  const rows = [cols.join(';')];
+  data.forEach(r => rows.push([r.id,r.tipo,r.nome,r.data,r.plano,r.lote,r.valorPct,r.entrada,r.fotosExt,r.fotosPresente,r.valorExtras,r.album,r.valorAlbum,calcTotal(r),calcReceber(r),r.tipoPermuta].join(';')));
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob(['﻿'+rows.join('\n')],{type:'text/csv;charset=utf-8;'}));
+  a.download = 'juliana_brandao_campanhas.csv';
+  a.click();
+}
+
+function showToast(msg, type='success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = type==='error'
+    ? 'rgba(155,35,53,.9)' : 'rgba(57,217,138,.9)';
+  t.style.color = '#fff';
+  t.style.display = 'block';
+  setTimeout(() => { t.style.display='none'; }, 3000);
+}
+
+// INIT
+renderDashboard();
+</script>
+</body>
+</html>
