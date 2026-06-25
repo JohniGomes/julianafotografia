@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta · Juliana Brandão Fotografia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --wine:   #CC3F37;
+  --wine2:  #802722;
+  --dark:   #1c0908;
+  --mid:    #4D2D2C;
+  --muted:  #804B49;
+  --cream:  #F5E5E4;
+  --white:  #FFFAF0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--dark);
+  color: var(--cream);
+  overflow-x: hidden;
+}
+
+/* ── VIDEO BACKGROUND ── */
+.video-bg {
+  position: fixed; inset: 0; z-index: 0;
+  overflow: hidden;
+}
+
+.video-bg video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: .18;
+}
+
+.video-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg,
+      rgba(28,9,8,.82) 0%,
+      rgba(28,9,8,.55) 30%,
+      rgba(28,9,8,.72) 70%,
+      rgba(28,9,8,.92) 100%
+    );
+}
+
+/* ── PAGE ── */
+.page { position: relative; z-index: 1; }
+
+/* ── INTRO HEADER ── */
+.intro {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 80px 32px;
+}
+
+.intro-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(204,63,55,.12);
+  border: 1px solid rgba(204,63,55,.3);
+  border-radius: 100px; padding: 7px 20px;
+  font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--wine);
+  margin-bottom: 28px;
+}
+
+.intro-tag::before {
+  content: ''; width: 6px; height: 6px;
+  background: var(--wine); border-radius: 50%;
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:.2} }
+
+.intro-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 700; line-height: 1.1;
+  color: var(--white); margin-bottom: 24px;
+}
+
+.intro-title em {
+  font-style: italic;
+  background: linear-gradient(90deg, var(--wine), #e05550);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.intro-sub {
+  font-size: 17px; color: var(--muted); max-width: 540px;
+  line-height: 1.7; margin-bottom: 48px;
+}
+
+.scroll-hint {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--muted); font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; animation: bounce 2s ease-in-out infinite;
+}
+
+.scroll-hint::after {
+  content: '';
+  width: 1px; height: 48px;
+  background: linear-gradient(180deg, var(--wine), transparent);
+}
+
+@keyframes bounce { 0%,100%{transform:translateY(0)}50%{transform:translateY(6px)} }
+
+/* ── CONTAINERS ── */
+.container { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+
+section { padding: 100px 0; }
+
+/* ── SECTION LABEL ── */
+.sec-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--wine);
+  margin-bottom: 14px; display: block;
+}
+
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 4vw, 46px); font-weight: 700;
+  color: var(--white); line-height: 1.2; margin-bottom: 16px;
+}
+
+.sec-title em { font-style: italic; color: var(--wine); }
+
+.sec-sub { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 560px; }
+
+/* ── PRODUCT SECTION ── */
+.product-section {
+  padding: 100px 0;
+  position: relative;
+}
+
+.product-section + .product-section {
+  border-top: 1px solid rgba(204,63,55,.1);
+}
+
+.product-num-bg {
+  font-family: 'Playfair Display', serif;
+  font-size: 180px; font-weight: 700; line-height: 1;
+  color: rgba(204,63,55,.06);
+  position: absolute; top: 60px; right: 40px;
+  pointer-events: none; user-select: none;
+}
+
+.product-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px; align-items: start;
+  margin-bottom: 64px;
+}
+
+.product-layout.reverse { direction: rtl; }
+.product-layout.reverse > * { direction: ltr; }
+
+.product-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(204,63,55,.1); border: 1px solid rgba(204,63,55,.25);
+  border-radius: 8px; padding: 6px 14px;
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--wine);
+  margin-bottom: 20px;
+}
+
+.product-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 3vw, 38px); font-weight: 700;
+  color: var(--white); line-height: 1.2; margin-bottom: 16px;
+}
+
+.product-desc { font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 28px; }
+
+.feature-list { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+
+.feature-list li {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 14px; color: var(--cream); line-height: 1.5;
+}
+
+.feature-list li::before {
+  content: '✦';
+  color: var(--wine); font-size: 11px;
+  margin-top: 3px; flex-shrink: 0;
+}
+
+/* ── MOCKUPS ── */
+.browser-frame {
+  background: rgba(77,45,44,.5);
+  border: 1px solid rgba(204,63,55,.2);
+  border-radius: 14px; overflow: hidden;
+  box-shadow: 0 28px 70px rgba(0,0,0,.5), 0 0 0 1px rgba(204,63,55,.08);
+  backdrop-filter: blur(4px);
+}
+
+.browser-bar {
+  background: rgba(28,9,8,.7);
+  padding: 10px 14px;
+  display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid rgba(204,63,55,.12);
+}
+
+.browser-dots { display: flex; gap: 5px; }
+.browser-dots span { width: 9px; height: 9px; border-radius: 50%; }
+.dot-r { background: #CC3F37; } .dot-y { background: #804B49; } .dot-g { background: #802722; }
+
+.browser-url {
+  flex:1; background: rgba(204,63,55,.07);
+  border: 1px solid rgba(204,63,55,.12); border-radius: 5px;
+  padding: 4px 10px; font: 11px 'Inter'; color: var(--muted);
+}
+
+.browser-screen {
+  padding: 14px; height: 260px;
+  background: linear-gradient(145deg, #2a1010 0%, #1a0808 100%);
+}
+
+.mobile-pair {
+  display: flex; gap: 20px; justify-content: center; align-items: flex-end;
+}
+
+.mobile-frame {
+  width: 160px; height: 310px;
+  background: rgba(77,45,44,.5);
+  border-radius: 26px;
+  border: 1.5px solid rgba(204,63,55,.25);
+  overflow: hidden;
+  box-shadow: 0 28px 70px rgba(0,0,0,.5);
+  position: relative;
+  backdrop-filter: blur(4px);
+}
+
+.mobile-notch {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 60px; height: 20px;
+  background: rgba(77,45,44,.5); border-radius: 0 0 12px 12px;
+  z-index: 2;
+}
+
+.mobile-screen {
+  height: 100%;
+  background: linear-gradient(160deg, #2a1010 0%, #1a0808 100%);
+  padding: 26px 10px 10px;
+}
+
+/* SCREEN CONTENT */
+.s-header { background: rgba(204,63,55,.14); border-radius:5px; height:24px; margin-bottom:8px; display:flex; align-items:center; padding:0 8px; gap:6px; }
+.s-header .dot { width:14px; height:14px; border-radius:50%; background:rgba(204,63,55,.4); }
+.s-header .line { flex:1; height:3px; background:rgba(245,229,228,.1); border-radius:2px; }
+.s-kpis { display:flex; gap:5px; margin-bottom:8px; }
+.s-kpi { flex:1; background:rgba(204,63,55,.1); border:1px solid rgba(204,63,55,.2); border-radius:5px; padding:6px 5px; }
+.s-kpi .kl { height:3px; background:rgba(245,229,228,.15); border-radius:2px; margin-bottom:4px; width:70%; }
+.s-kpi .kv { height:7px; border-radius:2px; }
+.s-bars { display:flex; gap:4px; align-items:flex-end; height:54px; }
+.s-bar { flex:1; border-radius:2px 2px 0 0; background:rgba(204,63,55,.5); }
+.s-row { height:4px; background:rgba(245,229,228,.06); border-radius:2px; margin-bottom:5px; }
+.s-row.w80{width:80%;} .s-row.w60{width:60%;} .s-row.w90{width:90%;}
+.s-card { background:rgba(204,63,55,.08); border:1px solid rgba(204,63,55,.15); border-radius:5px; padding:8px; margin-bottom:6px; }
+.s-card-img { height:40px; background:rgba(204,63,55,.12); border-radius:4px; margin-bottom:6px; display:flex; align-items:center; justify-content:center; }
+.s-card-line { height:3px; background:rgba(245,229,228,.1); border-radius:2px; margin-bottom:3px; }
+.s-grid { display:grid; grid-template-columns:1fr 1fr; gap:5px; margin-bottom:8px; }
+.s-grid-item { background:rgba(204,63,55,.1); border:1px solid rgba(204,63,55,.18); border-radius:5px; height:55px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; }
+.s-badge { background:linear-gradient(90deg,rgba(204,63,55,.22),rgba(128,39,34,.18)); border:1px solid rgba(204,63,55,.3); border-radius:5px; padding:7px; display:flex; align-items:center; gap:6px; }
+.s-badge .dot2 { width:9px; height:9px; border-radius:50%; background:rgba(204,63,55,.5); flex-shrink:0; }
+.s-badge .lx { flex:1; height:3px; background:rgba(245,229,228,.15); border-radius:2px; }
+.s-badge .btn-s { width:26px; height:13px; background:rgba(204,63,55,.45); border-radius:3px; flex-shrink:0; }
+
+/* ── DIFERENCIAL GRID ── */
+.diff-section {
+  padding: 56px 48px;
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(204,63,55,.12);
+  border-radius: 20px;
+  position: relative; overflow: hidden;
+}
+
+.diff-section::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--wine), transparent);
+}
+
+.diff-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; color: var(--white);
+  margin-bottom: 32px;
+  display: flex; align-items: center; gap: 14px;
+}
+
+.diff-section-title::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, rgba(204,63,55,.3), transparent);
+}
+
+.diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+.diff-card {
+  padding: 22px; border-radius: 14px;
+  background: rgba(204,63,55,.05);
+  border: 1px solid rgba(204,63,55,.12);
+  transition: all .25s;
+}
+
+.diff-card:hover {
+  background: rgba(204,63,55,.09);
+  border-color: rgba(204,63,55,.28);
+  transform: translateY(-3px);
+}
+
+.diff-icon-wrap {
+  width: 36px; height: 36px;
+  background: rgba(204,63,55,.12); border: 1px solid rgba(204,63,55,.2);
+  border-radius: 9px; margin-bottom: 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.diff-icon-wrap svg { width: 16px; height: 16px; stroke: var(--wine); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+.diff-title { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 7px; }
+.diff-desc { font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+
+/* ── TIMELINE ── */
+.timeline-section { background: rgba(0,0,0,.25); }
+
+.timeline { position: relative; padding-left: 36px; max-width: 620px; margin: 0 auto; }
+
+.timeline::before {
+  content: ''; position: absolute; left: 10px; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, var(--wine), rgba(204,63,55,.08));
+}
+
+.tl-item { position: relative; padding-bottom: 40px; }
+.tl-item:last-child { padding-bottom: 0; }
+
+.tl-dot {
+  position: absolute; left: -30px; top: 5px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--wine);
+  box-shadow: 0 0 14px rgba(204,63,55,.5);
+  border: 2px solid var(--dark);
+}
+
+.tl-phase { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--wine); margin-bottom: 5px; }
+.tl-title { font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 7px; }
+.tl-desc { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+
+/* ── INVESTMENT ── */
+.invest-section {}
+
+.plans-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 18px; margin-bottom: 24px;
+}
+
+.plan-card {
+  background: rgba(255,255,255,.025);
+  border: 1px solid rgba(204,63,55,.15);
+  border-radius: 20px; padding: 32px 28px;
+  position: relative; transition: all .3s;
+}
+
+.plan-card:hover { border-color: rgba(204,63,55,.3); transform: translateY(-4px); }
+
+.plan-card.featured {
+  background: linear-gradient(145deg, rgba(204,63,55,.1), rgba(77,45,44,.06));
+  border-color: rgba(204,63,55,.45);
+  box-shadow: 0 0 60px rgba(204,63,55,.14);
+}
+
+.plan-ribbon {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--wine); color: #fff;
+  font-size: 9px; font-weight: 700; letter-spacing: 1.8px;
+  text-transform: uppercase; padding: 5px 18px; border-radius: 100px;
+  white-space: nowrap;
+}
+
+.plan-icon {
+  width: 44px; height: 44px; background: rgba(204,63,55,.1);
+  border: 1px solid rgba(204,63,55,.2); border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+}
+
+.plan-icon svg { width: 20px; height: 20px; stroke: var(--wine); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
+.plan-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; color: var(--white); margin-bottom: 4px;
+}
+
+.plan-price {
+  font-size: 40px; font-weight: 700; color: var(--wine);
+  line-height: 1; margin-bottom: 4px;
+}
+
+.plan-price sup { font-size: 18px; vertical-align: super; }
+.plan-price sub { font-size: 14px; font-weight: 400; color: var(--muted); }
+
+.plan-economy {
+  display: inline-block;
+  background: rgba(204,63,55,.15); border: 1px solid rgba(204,63,55,.3);
+  color: var(--wine); font-size: 11px; font-weight: 700;
+  padding: 3px 10px; border-radius: 5px; margin-bottom: 14px;
+}
+
+.plan-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+
+.plan-divider { height: 1px; background: rgba(204,63,55,.1); margin-bottom: 20px; }
+
+.plan-feats { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+
+.plan-feats li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 12.5px; color: var(--cream); line-height: 1.4;
+}
+
+.plan-feats li .ck { color: var(--wine); flex-shrink: 0; font-weight: 700; margin-top: 1px; }
+.plan-feats li .cx { color: rgba(245,229,228,.2); flex-shrink: 0; }
+
+.invest-note {
+  text-align: center; font-size: 13px; color: var(--muted);
+  padding: 20px; background: rgba(204,63,55,.05);
+  border: 1px solid rgba(204,63,55,.12); border-radius: 12px;
+}
+
+.invest-note strong { color: var(--cream); }
+
+/* ── DEMO SECTIONS ── */
+.demo-section { padding: 90px 0; }
+.demo-intro { text-align: center; margin-bottom: 60px; }
+
+.screen-list { display: flex; flex-direction: column; gap: 80px; }
+
+.screen-item { display: grid; grid-template-columns: 1fr 2fr; gap: 52px; align-items: center; }
+.screen-item.flip { grid-template-columns: 2fr 1fr; }
+.screen-item.flip .screen-info { order: 2; }
+.screen-item.flip .screen-mock { order: 1; }
+
+.screen-num { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; color: var(--wine); text-transform: uppercase; margin-bottom: 8px; }
+.screen-name { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--white); margin-bottom: 10px; line-height: 1.2; }
+.screen-desc { font-size: 13.5px; color: var(--muted); line-height: 1.75; margin-bottom: 18px; }
+.screen-bullets { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.screen-bullets li { font-size: 12.5px; color: var(--cream); display: flex; align-items: flex-start; gap: 9px; line-height: 1.4; }
+.screen-bullets li::before { content: '✦'; color: var(--wine); font-size: 9px; margin-top: 3px; flex-shrink: 0; }
+
+/* ── DESKTOP APP FRAME ── */
+.app-frame { background: #110404; border: 1px solid rgba(204,63,55,.2); border-radius: 12px; overflow: hidden; box-shadow: 0 28px 70px rgba(0,0,0,.65); }
+.app-chrome { background: #0b0202; padding: 8px 12px; display: flex; align-items: center; gap: 9px; border-bottom: 1px solid rgba(204,63,55,.1); }
+.app-chrome .c-dots { display: flex; gap: 4px; }
+.app-chrome .c-dots span { width: 8px; height: 8px; border-radius: 50%; }
+.app-chrome .c-url { flex: 1; background: rgba(204,63,55,.06); border: 1px solid rgba(204,63,55,.1); border-radius: 4px; padding: 3px 9px; font-size: 10px; color: var(--muted); }
+
+.app-body { display: flex; height: 300px; }
+.app-sidebar { width: 48px; background: #080202; border-right: 1px solid rgba(204,63,55,.1); display: flex; flex-direction: column; align-items: center; padding: 10px 0; gap: 3px; flex-shrink: 0; }
+.app-logo { width: 26px; height: 26px; border-radius: 6px; background: var(--wine); display: flex; align-items: center; justify-content: center; margin-bottom: 8px; font-family: 'Playfair Display', serif; font-size: 11px; font-weight: 700; color: #fff; }
+.nav-ic { width: 30px; height: 30px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+.nav-ic svg { width: 13px; height: 13px; stroke: rgba(245,229,228,.25); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.nav-ic.on { background: rgba(204,63,55,.18); }
+.nav-ic.on svg { stroke: var(--wine); }
+
+.app-main { flex: 1; padding: 12px; overflow: hidden; display: flex; flex-direction: column; gap: 8px; }
+.app-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px; }
+.app-topbar .pg-title { font-size: 12px; font-weight: 700; color: var(--white); }
+.app-topbar .pg-sub { font-size: 9px; color: var(--muted); }
+.app-topbar .pg-btn { background: var(--wine); color: #fff; font-size: 9px; font-weight: 600; padding: 3px 9px; border-radius: 4px; }
+
+/* KPI cards */
+.kpi-row { display: flex; gap: 6px; }
+.kpi-card { flex: 1; background: rgba(204,63,55,.08); border: 1px solid rgba(204,63,55,.16); border-radius: 6px; padding: 8px; }
+.kpi-label { font-size: 8px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.kpi-val { font-size: 13px; font-weight: 700; color: var(--white); line-height: 1; }
+.kpi-val.wine { color: var(--wine); }
+.kpi-sub { font-size: 8px; color: rgba(204,63,55,.6); margin-top: 2px; }
+
+/* Data rows */
+.data-table { background: rgba(255,255,255,.02); border: 1px solid rgba(204,63,55,.1); border-radius: 6px; overflow: hidden; }
+.dt-head { display: flex; background: rgba(204,63,55,.06); padding: 5px 8px; gap: 0; border-bottom: 1px solid rgba(204,63,55,.1); }
+.dt-head span { font-size: 8px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; }
+.dt-row { display: flex; padding: 5px 8px; gap: 0; border-bottom: 1px solid rgba(204,63,55,.05); align-items: center; }
+.dt-row:last-child { border-bottom: none; }
+.dt-row span { font-size: 9.5px; color: var(--cream); }
+.dt-row .muted { color: var(--muted); }
+.dt-c1 { flex: 1.6; }
+.dt-c2 { flex: 1.2; }
+.dt-c3 { flex: 1.2; }
+.dt-c4 { flex: .9; }
+.dt-c5 { flex: .8; text-align: right; }
+
+.badge { display: inline-block; font-size: 8px; font-weight: 600; padding: 1px 6px; border-radius: 3px; }
+.badge-g { background: rgba(74,222,128,.12); border: 1px solid rgba(74,222,128,.25); color: #4ade80; }
+.badge-y { background: rgba(250,204,21,.1); border: 1px solid rgba(250,204,21,.2); color: #facc15; }
+.badge-r { background: rgba(204,63,55,.15); border: 1px solid rgba(204,63,55,.3); color: #e05550; }
+
+/* Mini bar chart */
+.mini-bars { display: flex; gap: 4px; align-items: flex-end; }
+.mini-bar { flex: 1; border-radius: 2px 2px 0 0; background: rgba(204,63,55,.5); }
+.mini-bar.hi { background: var(--wine); }
+
+/* ── PHONE FRAME ── */
+.phone-scroll { display: flex; gap: 20px; justify-content: flex-start; overflow-x: auto; padding-bottom: 10px; scroll-snap-type: x mandatory; }
+.phone-scroll::-webkit-scrollbar { height: 3px; }
+.phone-scroll::-webkit-scrollbar-thumb { background: rgba(204,63,55,.3); border-radius: 2px; }
+.phone-col { display: flex; flex-direction: column; align-items: center; gap: 10px; flex-shrink: 0; scroll-snap-align: start; }
+.phone-box { width: 180px; background: #080202; border: 1.5px solid rgba(204,63,55,.22); border-radius: 32px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,.65); }
+.ph-island-wrap { background: #080202; padding: 6px 0 0; display: flex; justify-content: center; }
+.ph-island { width: 60px; height: 18px; background: #080202; border: 1px solid rgba(204,63,55,.1); border-radius: 0 0 12px 12px; }
+.ph-screen { background: #110404; min-height: 340px; padding: 8px 10px 10px; }
+.phone-lbl { font-size: 10px; color: var(--muted); text-align: center; font-weight: 500; }
+
+/* Phone inner components */
+.ph-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.ph-title { font-size: 13px; font-weight: 700; color: var(--white); }
+.ph-sub { font-size: 9px; color: var(--muted); }
+.ph-logo-row { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 18px 0 14px; }
+.ph-logo-circle { width: 54px; height: 54px; border-radius: 50%; background: linear-gradient(135deg, var(--wine), #802722); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #fff; border: 2px solid rgba(204,63,55,.4); }
+.ph-brand { font-family: 'Playfair Display', serif; font-size: 13px; color: var(--white); }
+.ph-brand-sub { font-size: 9px; color: var(--muted); }
+.ph-field { background: rgba(204,63,55,.06); border: 1px solid rgba(204,63,55,.15); border-radius: 6px; padding: 7px 10px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.ph-field-label { font-size: 9px; color: var(--muted); flex: 1; }
+.ph-btn-full { background: var(--wine); border-radius: 7px; padding: 9px; text-align: center; font-size: 11px; font-weight: 700; color: #fff; margin-top: 4px; }
+.ph-card { background: rgba(204,63,55,.07); border: 1px solid rgba(204,63,55,.13); border-radius: 8px; padding: 9px; margin-bottom: 7px; }
+.ph-card-img { height: 64px; background: linear-gradient(135deg, rgba(204,63,55,.2), rgba(128,39,34,.3)); border-radius: 5px; margin-bottom: 6px; display: flex; align-items: center; justify-content: center; }
+.ph-card-play { width: 20px; height: 20px; border-radius: 50%; background: rgba(204,63,55,.6); display: flex; align-items: center; justify-content: center; }
+.ph-card-play::after { content: ''; border-left: 6px solid #fff; border-top: 4px solid transparent; border-bottom: 4px solid transparent; margin-left: 2px; }
+.ph-card-title { font-size: 10px; font-weight: 600; color: var(--white); margin-bottom: 2px; }
+.ph-card-sub { font-size: 8.5px; color: var(--muted); }
+.ph-section-label { font-size: 8px; font-weight: 700; color: var(--wine); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
+.ph-cat-row { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+.ph-cat { background: rgba(204,63,55,.1); border: 1px solid rgba(204,63,55,.18); border-radius: 4px; padding: 3px 7px; font-size: 8.5px; color: var(--cream); }
+.ph-cat.active { background: rgba(204,63,55,.22); border-color: rgba(204,63,55,.4); color: var(--wine); font-weight: 600; }
+.ph-course-row { display: flex; align-items: center; gap: 7px; padding: 6px 0; border-bottom: 1px solid rgba(204,63,55,.07); }
+.ph-course-thumb { width: 32px; height: 24px; border-radius: 3px; background: rgba(204,63,55,.18); flex-shrink: 0; }
+.ph-course-name { font-size: 9px; color: var(--white); font-weight: 500; }
+.ph-course-sub { font-size: 8px; color: var(--muted); }
+.ph-video-player { height: 90px; background: #000; border-radius: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.ph-video-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #1a0808, #0d0202); }
+.ph-play-btn { width: 28px; height: 28px; border-radius: 50%; background: rgba(204,63,55,.8); display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
+.ph-play-btn::after { content: ''; border-left: 8px solid #fff; border-top: 5px solid transparent; border-bottom: 5px solid transparent; margin-left: 2px; }
+.ph-post { background: rgba(204,63,55,.05); border: 1px solid rgba(204,63,55,.1); border-radius: 7px; padding: 8px; margin-bottom: 6px; }
+.ph-post-head { display: flex; align-items: center; gap: 5px; margin-bottom: 5px; }
+.ph-avatar { width: 20px; height: 20px; border-radius: 50%; background: var(--wine); display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; color: #fff; flex-shrink: 0; }
+.ph-post-name { font-size: 9px; font-weight: 600; color: var(--white); }
+.ph-post-time { font-size: 7.5px; color: var(--muted); }
+.ph-post-text { font-size: 8.5px; color: var(--cream); line-height: 1.4; }
+.ph-bottom-nav { display: flex; background: #080202; border-top: 1px solid rgba(204,63,55,.1); padding: 7px 0 4px; }
+.ph-nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.ph-nav-item svg { width: 14px; height: 14px; stroke: rgba(245,229,228,.25); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.ph-nav-item.active svg { stroke: var(--wine); }
+.ph-nav-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--wine); }
+.ph-profile-top { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 0 8px; }
+.ph-profile-av { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--wine), #802722); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff; border: 2px solid rgba(204,63,55,.4); }
+.ph-profile-name { font-size: 12px; font-weight: 700; color: var(--white); }
+.ph-plan-badge { background: rgba(204,63,55,.15); border: 1px solid rgba(204,63,55,.3); border-radius: 5px; padding: 3px 10px; font-size: 9px; color: var(--wine); font-weight: 600; }
+.ph-setting-row { display: flex; align-items: center; gap: 7px; padding: 6px 0; border-bottom: 1px solid rgba(204,63,55,.07); }
+.ph-setting-row svg { width: 11px; height: 11px; stroke: var(--muted); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.ph-setting-text { font-size: 9.5px; color: var(--cream); flex: 1; }
+.ph-setting-arr { font-size: 9px; color: var(--muted); }
+
+@media (max-width: 960px) {
+  .screen-item, .screen-item.flip { grid-template-columns: 1fr; }
+  .screen-item .screen-info, .screen-item.flip .screen-info { order: 1 !important; }
+  .screen-item .screen-mock, .screen-item.flip .screen-mock { order: 2 !important; }
+}
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .product-layout { grid-template-columns: 1fr; direction: ltr !important; gap: 40px; }
+  .diff-grid { grid-template-columns: 1fr 1fr; }
+  .plans-row { grid-template-columns: 1fr; }
+  .plan-card.featured { transform: none; }
+  .intro-title { font-size: 32px; }
+  section { padding: 70px 0; }
+  .diff-section { padding: 36px 24px; }
+  .product-num-bg { font-size: 100px; }
+}
+
+@media (max-width: 600px) {
+  .diff-grid { grid-template-columns: 1fr; }
+  .mobile-pair { gap: 12px; }
+  .mobile-frame { width: 140px; height: 280px; }
+  .container { padding: 0 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- VIDEO BACKGROUND -->
+<div class="video-bg">
+  <video autoplay muted loop playsinline>
+    <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260418_115655_b4d9cd77-feed-43cd-a198-af78ebdf1f7a.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="page">
+
+  <!-- ══ INTRO ══ -->
+  <div class="intro">
+    <h1 class="intro-title reveal">
+      A marca<br><em>Juliana Brandão</em><br>no próximo nível digital
+    </h1>
+    <p class="intro-sub reveal">
+      Um ecossistema pensado especialmente para transformar a sua operação e a sua comunidade em produtos digitais de alto valor, com identidade, profissionalismo e recorrência.
+    </p>
+    <div class="scroll-hint reveal">Explorar</div>
+  </div>
+
+  <!-- ══ PRODUTO 01 ══ -->
+  <div class="product-section">
+    <div class="container">
+      <div class="product-num-bg">01</div>
+
+      <div class="product-layout reveal">
+        <div>
+          <div class="product-badge">Produto 01</div>
+          <h2 class="product-title">Sistema de Gestão<br>da Operação</h2>
+          <p class="product-desc">
+            Um dashboard completo e personalizado com a sua identidade visual para você ter controle total da operação fotográfica — clientes, finanças, gráficos e histórico. Tudo em um lugar, sem depender de planilhas.
+          </p>
+          <ul class="feature-list">
+            <li>Dashboard com KPIs em tempo real com faturamento, sessões e ticket médio</li>
+            <li>Tela de lançamento para clientes pagantes e permutas</li>
+            <li>Controle de planos, álbuns, extras e valores a receber</li>
+            <li>Histórico completo de todos os clientes com filtros</li>
+            <li>Gráficos de desempenho por período, plano e tipo de cliente</li>
+            <li>Login com autenticação e dados na nuvem.</li>
+            <li>Exportação de relatórios pro Excel.</li>
+            <li>100% responsivo: celular, tablet e computador.</li>
+          </ul>
+        </div>
+
+        <!-- BROWSER MOCKUP -->
+        <div>
+          <div class="browser-frame">
+            <div class="browser-bar">
+              <div class="browser-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
+              <div class="browser-url">julianabrandao.app/dashboard</div>
+            </div>
+            <div class="browser-screen">
+              <!-- KPI row -->
+              <div style="display:flex;gap:8px;margin-bottom:10px;">
+                <div style="flex:1;background:rgba(204,63,55,.12);border:1px solid rgba(204,63,55,.22);border-radius:6px;padding:8px;">
+                  <div style="height:3px;background:rgba(245,229,228,.15);border-radius:2px;width:60%;margin-bottom:5px;"></div>
+                  <div style="height:10px;background:rgba(204,63,55,.55);border-radius:2px;width:80%;"></div>
+                </div>
+                <div style="flex:1;background:rgba(204,63,55,.08);border:1px solid rgba(204,63,55,.15);border-radius:6px;padding:8px;">
+                  <div style="height:3px;background:rgba(245,229,228,.1);border-radius:2px;width:55%;margin-bottom:5px;"></div>
+                  <div style="height:10px;background:rgba(128,39,34,.55);border-radius:2px;width:70%;"></div>
+                </div>
+                <div style="flex:1;background:rgba(204,63,55,.08);border:1px solid rgba(204,63,55,.15);border-radius:6px;padding:8px;">
+                  <div style="height:3px;background:rgba(245,229,228,.1);border-radius:2px;width:50%;margin-bottom:5px;"></div>
+                  <div style="height:10px;background:rgba(128,75,73,.5);border-radius:2px;width:60%;"></div>
+                </div>
+              </div>
+              <!-- Charts -->
+              <div style="display:flex;gap:8px;height:136px;">
+                <div style="flex:2;background:rgba(204,63,55,.06);border:1px solid rgba(204,63,55,.1);border-radius:6px;padding:10px;">
+                  <div style="display:flex;gap:5px;align-items:flex-end;height:90px;padding:0 4px;">
+                    <div style="flex:1;height:40%;background:rgba(204,63,55,.55);border-radius:3px 3px 0 0;"></div>
+                    <div style="flex:1;height:70%;background:rgba(204,63,55,.65);border-radius:3px 3px 0 0;"></div>
+                    <div style="flex:1;height:55%;background:rgba(204,63,55,.5);border-radius:3px 3px 0 0;"></div>
+                    <div style="flex:1;height:85%;background:rgba(204,63,55,.75);border-radius:3px 3px 0 0;"></div>
+                    <div style="flex:1;height:48%;background:rgba(204,63,55,.48);border-radius:3px 3px 0 0;"></div>
+                    <div style="flex:1;height:68%;background:rgba(204,63,55,.6);border-radius:3px 3px 0 0;"></div>
+                    <div style="flex:1;height:92%;background:rgba(204,63,55,.8);border-radius:3px 3px 0 0;"></div>
+                  </div>
+                </div>
+                <div style="flex:1;background:rgba(204,63,55,.06);border:1px solid rgba(204,63,55,.1);border-radius:6px;padding:10px;display:flex;align-items:center;justify-content:center;">
+                  <div style="width:88px;height:88px;border-radius:50%;border:16px solid rgba(204,63,55,.55);border-top-color:rgba(128,39,34,.75);border-right-color:rgba(128,75,73,.5);"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile floating -->
+          <div style="display:flex;justify-content:flex-end;margin-top:-60px;margin-right:-20px;position:relative;z-index:2;">
+            <div class="mobile-frame" style="width:130px;height:240px;box-shadow:0 20px 50px rgba(0,0,0,.6);">
+              <div class="mobile-notch" style="width:50px;height:18px;"></div>
+              <div class="mobile-screen" style="padding:24px 8px 8px;">
+                <div class="s-header" style="height:20px;margin-bottom:6px;">
+                  <div class="dot" style="width:12px;height:12px;border-radius:50%;background:rgba(204,63,55,.4);"></div>
+                  <div class="line" style="flex:1;height:3px;background:rgba(245,229,228,.1);border-radius:2px;"></div>
+                </div>
+                <div class="s-kpis">
+                  <div class="s-kpi"><div class="kl"></div><div class="kv" style="background:rgba(204,63,55,.55);"></div></div>
+                  <div class="s-kpi"><div class="kl"></div><div class="kv" style="background:rgba(128,39,34,.5);"></div></div>
+                </div>
+                <div class="s-bars" style="height:45px;margin-bottom:7px;">
+                  <div class="s-bar" style="height:40%;"></div>
+                  <div class="s-bar" style="height:68%;"></div>
+                  <div class="s-bar" style="height:55%;"></div>
+                  <div class="s-bar" style="height:82%;"></div>
+                  <div class="s-bar" style="height:48%;"></div>
+                </div>
+                <div class="s-row w90"></div>
+                <div class="s-row w60"></div>
+                <div class="s-row w80"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIFERENCIAIS PRODUTO 01 -->
+      <div class="diff-section reveal">
+        <div class="diff-section-title">Diferenciais do Sistema</div>
+        <div class="diff-grid">
+          <div class="diff-card">
+            <div class="diff-icon-wrap">
+              <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
+            <div class="diff-title">Identidade Visual Sua</div>
+            <div class="diff-desc">O sistema tem as suas cores, sua logo e sua foto. Nenhuma semelhança com ferramentas genéricas de mercado.</div>
+          </div>
+          <div class="diff-card">
+            <div class="diff-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="diff-title">Dados na Nuvem com Login</div>
+            <div class="diff-desc">Acesso seguro e de qualquer dispositivo. Seus dados não ficam presos em um computador ou planilha local.</div>
+          </div>
+          <div class="diff-card">
+            <div class="diff-icon-wrap">
+              <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="diff-title">Visão do Negócio em Tempo Real</div>
+            <div class="diff-desc">Faturamento, ticket médio e volume de sessões visíveis, sem abrir calculadora ou montar tabela manual.</div>
+          </div>
+          <div class="diff-card">
+            <div class="diff-icon-wrap">
+              <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <div class="diff-title">100% Responsivo</div>
+            <div class="diff-desc">Funciona perfeitamente no celular, tablet e computador. Você lança um cliente no seu aparelho e visualiza no notebook.</div>
+          </div>
+          <div class="diff-card">
+            <div class="diff-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/></svg>
+            </div>
+            <div class="diff-title">Sem Planilhas</div>
+            <div class="diff-desc">Tela de lançamento intuitiva. Registra um cliente em segundos, sem abrir Excel, Google Sheets ou qualquer outro arquivo.</div>
+          </div>
+          <div class="diff-card">
+            <div class="diff-icon-wrap">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            </div>
+            <div class="diff-title">Histórico Completo</div>
+            <div class="diff-desc">Todos os clientes registrados com filtros por período, tipo e status. Nenhuma informação se perde.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ DEMO SISTEMA ══ -->
+  <section class="demo-section" style="background:rgba(0,0,0,.2);">
+    <div class="container">
+      <div class="demo-intro reveal">
+        <span class="sec-label">Produto 01 · Prévia</span>
+        <h2 class="sec-title">O que você verá ao<br><em>acessar o sistema</em></h2>
+        <p class="sec-sub" style="margin:0 auto;">Cada tela abaixo já está mapeada. Seus dados, sua identidade, seu controle. (As telas podem ser alteradas conforme sua necessidade)</p>
+      </div>
+
+      <div class="screen-list">
+
+        <!-- TELA 01: Dashboard Executivo -->
+        <div class="screen-item reveal">
+          <div class="screen-info">
+            <div class="screen-num">Tela 01 · Visão Geral</div>
+            <div class="screen-name">Dashboard Executivo</div>
+            <div class="screen-desc">A primeira tela que você vê ao entrar. Faturamento do mês, ticket médio, progresso de meta e agenda do dia.</div>
+            <ul class="screen-bullets">
+              <li>Faturamento, sessões e ticket médio atualizados em tempo real</li>
+              <li>Barra de progresso de meta mensal com % concluído</li>
+              <li>Agenda do dia com horário e tipo de ensaio</li>
+            </ul>
+          </div>
+          <div class="screen-mock">
+            <div class="app-frame">
+              <div class="app-chrome">
+                <div class="c-dots"><span style="background:#CC3F37"></span><span style="background:#804B49"></span><span style="background:#802722"></span></div>
+                <div class="c-url">julianabrandao.app/dashboard</div>
+              </div>
+              <div class="app-body">
+                <div class="app-sidebar">
+                  <div class="app-logo">JB</div>
+                  <div class="nav-ic on"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+                  <div class="nav-ic"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+                  <div class="nav-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+                  <div class="nav-ic"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                  <div class="nav-ic"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+                </div>
+                <div class="app-main">
+                  <div class="app-topbar">
+                    <div><div class="pg-title">Dashboard</div><div class="pg-sub">Junho 2025 · Bem-vinda, Juliana</div></div>
+                  </div>
+                  <div class="kpi-row">
+                    <div class="kpi-card">
+                      <div class="kpi-label">Faturamento</div>
+                      <div class="kpi-val wine">R$18.240</div>
+                      <div class="kpi-sub">▲ 26% vs mai</div>
+                    </div>
+                    <div class="kpi-card">
+                      <div class="kpi-label">Ticket Médio</div>
+                      <div class="kpi-val">R$1.824</div>
+                      <div class="kpi-sub">10 sessões</div>
+                    </div>
+                    <div class="kpi-card">
+                      <div class="kpi-label">Meta Jun</div>
+                      <div class="kpi-val">10 / 15</div>
+                      <div class="kpi-sub" style="color:#4ade80;">67% concluído</div>
+                    </div>
+                    <div class="kpi-card">
+                      <div class="kpi-label">Permutas</div>
+                      <div class="kpi-val">3</div>
+                      <div class="kpi-sub">ativas</div>
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:8px;flex:1;">
+                    <div style="flex:2;background:rgba(204,63,55,.05);border:1px solid rgba(204,63,55,.1);border-radius:6px;padding:9px;">
+                      <div style="font-size:8px;color:var(--muted);margin-bottom:6px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;">Faturamento Mensal</div>
+                      <div class="mini-bars" style="height:100px;align-items:flex-end;">
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;"><div class="mini-bar" style="width:100%;height:50%;"></div><div style="font-size:7px;color:var(--muted);">Jan</div></div>
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;"><div class="mini-bar" style="width:100%;height:64%;"></div><div style="font-size:7px;color:var(--muted);">Fev</div></div>
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;"><div class="mini-bar" style="width:100%;height:54%;"></div><div style="font-size:7px;color:var(--muted);">Mar</div></div>
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;"><div class="mini-bar" style="width:100%;height:69%;"></div><div style="font-size:7px;color:var(--muted);">Abr</div></div>
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;"><div class="mini-bar" style="width:100%;height:59%;"></div><div style="font-size:7px;color:var(--muted);">Mai</div></div>
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;"><div class="mini-bar hi" style="width:100%;height:100%;"></div><div style="font-size:7px;color:var(--wine);font-weight:700;">Jun</div></div>
+                      </div>
+                    </div>
+                    <div style="flex:1;display:flex;flex-direction:column;gap:6px;">
+                      <div style="background:rgba(204,63,55,.05);border:1px solid rgba(204,63,55,.1);border-radius:6px;padding:8px;flex:1;">
+                        <div style="font-size:8px;color:var(--muted);margin-bottom:6px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;">Agenda Hoje</div>
+                        <div style="font-size:8px;color:var(--cream);padding:3px 0;border-bottom:1px solid rgba(204,63,55,.07);">09h00 · Ensaio Família · Marina S.</div>
+                        <div style="font-size:8px;color:var(--cream);padding:3px 0;border-bottom:1px solid rgba(204,63,55,.07);">14h30 · Ensaio Gestante · Camila R.</div>
+                        <div style="font-size:8px;color:var(--muted);padding:3px 0;">17h00 · <span style="color:rgba(204,63,55,.5)">Disponível</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TELA 02: CRM de Clientes -->
+        <div class="screen-item flip reveal">
+          <div class="screen-info">
+            <div class="screen-num">Tela 02 · Relacionamento</div>
+            <div class="screen-name">CRM de Clientes</div>
+            <div class="screen-desc">Todos os seus clientes organizados com status de atendimento, serviço contratado e próximos contatos.</div>
+            <ul class="screen-bullets">
+              <li>Funil de status: Contato Feito, Proposta, Confirmado, Entregue</li>
+              <li>Filtros por tipo de ensaio, status e período</li>
+              <li>Observações privadas por cliente</li>
+            </ul>
+          </div>
+          <div class="screen-mock">
+            <div class="app-frame">
+              <div class="app-chrome">
+                <div class="c-dots"><span style="background:#CC3F37"></span><span style="background:#804B49"></span><span style="background:#802722"></span></div>
+                <div class="c-url">julianabrandao.app/clientes</div>
+              </div>
+              <div class="app-body">
+                <div class="app-sidebar">
+                  <div class="app-logo">JB</div>
+                  <div class="nav-ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+                  <div class="nav-ic on"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+                  <div class="nav-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+                  <div class="nav-ic"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                  <div class="nav-ic"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+                </div>
+                <div class="app-main">
+                  <div class="app-topbar">
+                    <div><div class="pg-title">Clientes</div><div class="pg-sub">32 clientes cadastrados</div></div>
+                    <div class="pg-btn">+ Novo Cliente</div>
+                  </div>
+                  <div class="data-table">
+                    <div class="dt-head">
+                      <span class="dt-c1">Nome</span>
+                      <span class="dt-c2">Serviço</span>
+                      <span class="dt-c3">Status</span>
+                      <span class="dt-c4">Próx. Contato</span>
+                      <span class="dt-c5">Valor</span>
+                    </div>
+                    <div class="dt-row">
+                      <span class="dt-c1">Marina Silva</span>
+                      <span class="dt-c2 muted">Ensaio Família</span>
+                      <span class="dt-c3"><span class="badge badge-g">Confirmado</span></span>
+                      <span class="dt-c4 muted">Hoje</span>
+                      <span class="dt-c5" style="color:var(--wine);font-weight:600;">R$1.800</span>
+                    </div>
+                    <div class="dt-row">
+                      <span class="dt-c1">Camila Rocha</span>
+                      <span class="dt-c2 muted">Ensaio Gestante</span>
+                      <span class="dt-c3"><span class="badge badge-g">Confirmado</span></span>
+                      <span class="dt-c4 muted">Hoje</span>
+                      <span class="dt-c5" style="color:var(--wine);font-weight:600;">R$2.200</span>
+                    </div>
+                    <div class="dt-row">
+                      <span class="dt-c1">Ana Paula Mendes</span>
+                      <span class="dt-c2 muted">Ensaio Newborn</span>
+                      <span class="dt-c3"><span class="badge badge-y">Proposta</span></span>
+                      <span class="dt-c4 muted">27/06</span>
+                      <span class="dt-c5" style="color:var(--wine);font-weight:600;">R$2.500</span>
+                    </div>
+                    <div class="dt-row">
+                      <span class="dt-c1">Beatriz Costa</span>
+                      <span class="dt-c2 muted">Ensaio Debutante</span>
+                      <span class="dt-c3"><span class="badge badge-g">Entregue</span></span>
+                      <span class="dt-c4 muted">—</span>
+                      <span class="dt-c5" style="color:var(--wine);font-weight:600;">R$3.200</span>
+                    </div>
+                    <div class="dt-row">
+                      <span class="dt-c1">Rafael Lima</span>
+                      <span class="dt-c2 muted">Ensaio Casal</span>
+                      <span class="dt-c3"><span class="badge badge-r">Contato Feito</span></span>
+                      <span class="dt-c4 muted">28/06</span>
+                      <span class="dt-c5 muted">—</span>
+                    </div>
+                    <div class="dt-row">
+                      <span class="dt-c1">Thiago Alves</span>
+                      <span class="dt-c2 muted">Ensaio Externo</span>
+                      <span class="dt-c3"><span class="badge badge-y">Proposta</span></span>
+                      <span class="dt-c4 muted">30/06</span>
+                      <span class="dt-c5 muted">—</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TELA 03: Agenda -->
+        <div class="screen-item reveal">
+          <div class="screen-info">
+            <div class="screen-num">Tela 03 · Planejamento</div>
+            <div class="screen-name">Agenda Fotográfica</div>
+            <div class="screen-desc">Calendário visual com todos os ensaios agendados, entregas pendentes e dias disponíveis. Tudo com cor por tipo de sessão.</div>
+            <ul class="screen-bullets">
+              <li>Calendário com ensaios marcados por cor e tipo</li>
+              <li>Lista de entregas pendentes por cliente</li>
+              <li>Dias disponíveis destacados para facilitar agendamento</li>
+            </ul>
+          </div>
+          <div class="screen-mock">
+            <div class="app-frame">
+              <div class="app-chrome">
+                <div class="c-dots"><span style="background:#CC3F37"></span><span style="background:#804B49"></span><span style="background:#802722"></span></div>
+                <div class="c-url">julianabrandao.app/agenda</div>
+              </div>
+              <div class="app-body">
+                <div class="app-sidebar">
+                  <div class="app-logo">JB</div>
+                  <div class="nav-ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+                  <div class="nav-ic"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+                  <div class="nav-ic on"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+                  <div class="nav-ic"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                  <div class="nav-ic"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+                </div>
+                <div class="app-main">
+                  <div class="app-topbar">
+                    <div><div class="pg-title">Agenda · Junho 2025</div></div>
+                    <div class="pg-btn">+ Agendar</div>
+                  </div>
+                  <div style="display:flex;gap:8px;flex:1;">
+                    <div style="flex:1.5;background:rgba(204,63,55,.04);border:1px solid rgba(204,63,55,.1);border-radius:6px;padding:8px;">
+                      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px;">
+                        <div style="font-size:7px;color:var(--muted);text-align:center;">D</div><div style="font-size:7px;color:var(--muted);text-align:center;">S</div><div style="font-size:7px;color:var(--muted);text-align:center;">T</div><div style="font-size:7px;color:var(--muted);text-align:center;">Q</div><div style="font-size:7px;color:var(--muted);text-align:center;">Q</div><div style="font-size:7px;color:var(--muted);text-align:center;">S</div><div style="font-size:7px;color:var(--muted);text-align:center;">S</div>
+                      </div>
+                      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;">
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">1</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">2</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">3</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">4</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">5</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">6</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">7</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">8</div>
+                        <div style="font-size:8px;background:rgba(204,63,55,.35);border-radius:3px;color:#fff;text-align:center;padding:2px;">9</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">10</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">11</div>
+                        <div style="font-size:8px;background:rgba(204,63,55,.25);border-radius:3px;color:var(--cream);text-align:center;padding:2px;">12</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">13</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">14</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">15</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">16</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">17</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">18</div>
+                        <div style="font-size:8px;background:rgba(204,63,55,.35);border-radius:3px;color:#fff;text-align:center;padding:2px;">19</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">20</div>
+                        <div style="font-size:8px;background:rgba(128,75,73,.4);border-radius:3px;color:var(--cream);text-align:center;padding:2px;">21</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">22</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">23</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">24</div>
+                        <div style="font-size:8px;border:1px solid var(--wine);border-radius:3px;color:var(--wine);text-align:center;padding:2px;font-weight:700;">25</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">26</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">27</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">28</div>
+                        <div style="font-size:8px;background:rgba(204,63,55,.35);border-radius:3px;color:#fff;text-align:center;padding:2px;">29</div>
+                        <div style="font-size:8px;color:var(--muted);text-align:center;padding:2px;">30</div>
+                      </div>
+                    </div>
+                    <div style="flex:1;display:flex;flex-direction:column;gap:5px;">
+                      <div style="font-size:8px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;">Próximos Ensaios</div>
+                      <div style="background:rgba(204,63,55,.08);border-left:2px solid var(--wine);border-radius:0 5px 5px 0;padding:5px 7px;">
+                        <div style="font-size:9px;font-weight:600;color:var(--white);">Marina Silva</div>
+                        <div style="font-size:8px;color:var(--muted);">Família · Hoje 09h</div>
+                      </div>
+                      <div style="background:rgba(204,63,55,.08);border-left:2px solid var(--wine);border-radius:0 5px 5px 0;padding:5px 7px;">
+                        <div style="font-size:9px;font-weight:600;color:var(--white);">Camila Rocha</div>
+                        <div style="font-size:8px;color:var(--muted);">Gestante · Hoje 14h30</div>
+                      </div>
+                      <div style="background:rgba(128,75,73,.1);border-left:2px solid rgba(128,75,73,.5);border-radius:0 5px 5px 0;padding:5px 7px;">
+                        <div style="font-size:9px;font-weight:600;color:var(--white);">Beatriz Costa</div>
+                        <div style="font-size:8px;color:var(--muted);">Entrega álbum · 29/06</div>
+                      </div>
+                      <div style="background:rgba(204,63,55,.08);border-left:2px solid var(--wine);border-radius:0 5px 5px 0;padding:5px 7px;">
+                        <div style="font-size:9px;font-weight:600;color:var(--white);">Rafael Lima</div>
+                        <div style="font-size:8px;color:var(--muted);">Ensaio Casal · 29/06</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TELA 04: Financeiro -->
+        <div class="screen-item flip reveal">
+          <div class="screen-info">
+            <div class="screen-num">Tela 04 · Controle</div>
+            <div class="screen-name">Financeiro</div>
+            <div class="screen-desc">Receitas, despesas e lucro em uma só tela. Você vê o que entrou, o que saiu e o que sobrou.</div>
+            <ul class="screen-bullets">
+              <li>Receitas, despesas e lucro líquido por mês</li>
+              <li>Lista de lançamentos com categoria e status</li>
+              <li>Contas a receber com vencimento</li>
+            </ul>
+          </div>
+          <div class="screen-mock">
+            <div class="app-frame">
+              <div class="app-chrome">
+                <div class="c-dots"><span style="background:#CC3F37"></span><span style="background:#804B49"></span><span style="background:#802722"></span></div>
+                <div class="c-url">julianabrandao.app/financeiro</div>
+              </div>
+              <div class="app-body">
+                <div class="app-sidebar">
+                  <div class="app-logo">JB</div>
+                  <div class="nav-ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+                  <div class="nav-ic"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+                  <div class="nav-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+                  <div class="nav-ic on"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                  <div class="nav-ic"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+                </div>
+                <div class="app-main">
+                  <div class="app-topbar">
+                    <div><div class="pg-title">Financeiro · Junho 2025</div></div>
+                    <div class="pg-btn">+ Lançamento</div>
+                  </div>
+                  <div class="kpi-row">
+                    <div class="kpi-card" style="border-color:rgba(74,222,128,.2);background:rgba(74,222,128,.05);">
+                      <div class="kpi-label">Receitas</div>
+                      <div class="kpi-val" style="color:#4ade80;">R$18.240</div>
+                    </div>
+                    <div class="kpi-card" style="border-color:rgba(248,113,113,.2);background:rgba(248,113,113,.05);">
+                      <div class="kpi-label">Despesas</div>
+                      <div class="kpi-val" style="color:#f87171;">R$3.480</div>
+                    </div>
+                    <div class="kpi-card">
+                      <div class="kpi-label">Lucro Líquido</div>
+                      <div class="kpi-val wine">R$14.760</div>
+                      <div class="kpi-sub">81% margem</div>
+                    </div>
+                  </div>
+                  <div class="data-table">
+                    <div class="dt-head">
+                      <span class="dt-c1">Descrição</span>
+                      <span class="dt-c2">Categoria</span>
+                      <span class="dt-c3">Data</span>
+                      <span class="dt-c4">Tipo</span>
+                      <span class="dt-c5">Valor</span>
+                    </div>
+                    <div class="dt-row">
+                      <span class="dt-c1">Marina Silva · Família</span>
+                      <span class="dt-c2 muted">Ensaio</span>
+                      <span class="dt-c3 muted">25/06</span>
+                      <span class="dt-c4"><span class="badge badge-g">Entrada</span></span>
+                      <span class="dt-c5" style="color:#4ade80;font-weight:600;">+R$1.800</span>
+                    </div>
+                    <div class="dt-row">
+                      <span class="dt-c1">Camila Rocha · Gestante</span>
+                      <span class="dt-c2 muted">Ensaio</span>
+                      <span class="dt-c3 muted">25/06</span>
+                      <span class="dt-c4"><span class="badge badge-g">Entrada</span></span>
+                      <span class="dt-c5" style="color:#4ade80;font-weight:600;">+R$2.200</span>
+                    </div>
+                    <div class="dt-row">
+                      <span class="dt-c1">Aluguel estúdio</span>
+                      <span class="dt-c2 muted">Estrutura</span>
+                      <span class="dt-c3 muted">20/06</span>
+                      <span class="dt-c4"><span class="badge badge-r">Saída</span></span>
+                      <span class="dt-c5" style="color:#f87171;font-weight:600;">−R$800</span>
+                    </div>
+                    <div class="dt-row">
+                      <span class="dt-c1">Beatriz Costa · Debutante</span>
+                      <span class="dt-c2 muted">Ensaio</span>
+                      <span class="dt-c3 muted">18/06</span>
+                      <span class="dt-c4"><span class="badge badge-g">Entrada</span></span>
+                      <span class="dt-c5" style="color:#4ade80;font-weight:600;">+R$3.200</span>
+                    </div>
+                    <div class="dt-row">
+                      <span class="dt-c1">Ana Paula · A receber</span>
+                      <span class="dt-c2 muted">Ensaio</span>
+                      <span class="dt-c3 muted">30/06</span>
+                      <span class="dt-c4"><span class="badge badge-y">Pendente</span></span>
+                      <span class="dt-c5" style="color:#facc15;font-weight:600;">R$2.500</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TELA 05: Relatórios -->
+        <div class="screen-item reveal">
+          <div class="screen-info">
+            <div class="screen-num">Tela 05 · Inteligência</div>
+            <div class="screen-name">Relatórios</div>
+            <div class="screen-desc">Gráficos de evolução mensal, serviços mais vendidos e comparativo de desempenho, para você tomar decisões com dados.</div>
+            <ul class="screen-bullets">
+              <li>Gráfico de faturamento mês a mês com tendência</li>
+              <li>Ranking de serviços mais vendidos no período</li>
+              <li>Exportação em PDF ou Excel com um clique</li>
+              <li>IA Integrada. Faça perguntas como: "Qual foi o meu faturamento no último trimestre?"</li>
+            </ul>
+          </div>
+          <div class="screen-mock">
+            <div class="app-frame">
+              <div class="app-chrome">
+                <div class="c-dots"><span style="background:#CC3F37"></span><span style="background:#804B49"></span><span style="background:#802722"></span></div>
+                <div class="c-url">julianabrandao.app/relatorios</div>
+              </div>
+              <div class="app-body">
+                <div class="app-sidebar">
+                  <div class="app-logo">JB</div>
+                  <div class="nav-ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+                  <div class="nav-ic"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+                  <div class="nav-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+                  <div class="nav-ic"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                  <div class="nav-ic on"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+                </div>
+                <div class="app-main">
+                  <div class="app-topbar">
+                    <div><div class="pg-title">Relatórios</div><div class="pg-sub">Jan–Jun 2025</div></div>
+                    <div class="pg-btn">Exportar PDF</div>
+                  </div>
+                  <div style="display:flex;gap:8px;flex:1;">
+                    <div style="flex:2;background:rgba(204,63,55,.04);border:1px solid rgba(204,63,55,.1);border-radius:6px;padding:9px;">
+                      <div style="font-size:8px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;">Evolução de Faturamento</div>
+                      <div style="display:flex;gap:3px;align-items:flex-end;height:120px;">
+                        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;">
+                          <div style="font-size:7px;color:var(--muted);">12,4k</div>
+                          <div style="width:100%;height:50%;background:rgba(204,63,55,.4);border-radius:2px 2px 0 0;"></div>
+                          <div style="font-size:7px;color:var(--muted);">Jan</div>
+                        </div>
+                        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;">
+                          <div style="font-size:7px;color:var(--muted);">15,6k</div>
+                          <div style="width:100%;height:64%;background:rgba(204,63,55,.45);border-radius:2px 2px 0 0;"></div>
+                          <div style="font-size:7px;color:var(--muted);">Fev</div>
+                        </div>
+                        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;">
+                          <div style="font-size:7px;color:var(--muted);">13,2k</div>
+                          <div style="width:100%;height:54%;background:rgba(204,63,55,.4);border-radius:2px 2px 0 0;"></div>
+                          <div style="font-size:7px;color:var(--muted);">Mar</div>
+                        </div>
+                        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;">
+                          <div style="font-size:7px;color:var(--muted);">16,8k</div>
+                          <div style="width:100%;height:69%;background:rgba(204,63,55,.5);border-radius:2px 2px 0 0;"></div>
+                          <div style="font-size:7px;color:var(--muted);">Abr</div>
+                        </div>
+                        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;">
+                          <div style="font-size:7px;color:var(--muted);">14,4k</div>
+                          <div style="width:100%;height:59%;background:rgba(204,63,55,.45);border-radius:2px 2px 0 0;"></div>
+                          <div style="font-size:7px;color:var(--muted);">Mai</div>
+                        </div>
+                        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;">
+                          <div style="font-size:7px;color:var(--wine);font-weight:700;">18,2k</div>
+                          <div style="width:100%;height:100%;background:var(--wine);border-radius:2px 2px 0 0;"></div>
+                          <div style="font-size:7px;color:var(--wine);font-weight:700;">Jun</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="flex:1;background:rgba(204,63,55,.04);border:1px solid rgba(204,63,55,.1);border-radius:6px;padding:9px;">
+                      <div style="font-size:8px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;">Top Serviços</div>
+                      <div style="display:flex;flex-direction:column;gap:5px;">
+                        <div>
+                          <div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span style="font-size:8px;color:var(--cream);">Newborn</span><span style="font-size:8px;color:var(--wine);font-weight:600;">R$18.500</span></div>
+                          <div style="height:4px;background:rgba(204,63,55,.15);border-radius:2px;"><div style="width:85%;height:100%;background:var(--wine);border-radius:2px;"></div></div>
+                        </div>
+                        <div>
+                          <div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span style="font-size:8px;color:var(--cream);">Família</span><span style="font-size:8px;color:var(--muted);">R$14.200</span></div>
+                          <div style="height:4px;background:rgba(204,63,55,.15);border-radius:2px;"><div style="width:65%;height:100%;background:rgba(204,63,55,.5);border-radius:2px;"></div></div>
+                        </div>
+                        <div>
+                          <div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span style="font-size:8px;color:var(--cream);">Gestante</span><span style="font-size:8px;color:var(--muted);">R$11.000</span></div>
+                          <div style="height:4px;background:rgba(204,63,55,.15);border-radius:2px;"><div style="width:50%;height:100%;background:rgba(204,63,55,.4);border-radius:2px;"></div></div>
+                        </div>
+                        <div>
+                          <div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span style="font-size:8px;color:var(--cream);">Debutante</span><span style="font-size:8px;color:var(--muted);">R$9.600</span></div>
+                          <div style="height:4px;background:rgba(204,63,55,.15);border-radius:2px;"><div style="width:44%;height:100%;background:rgba(128,75,73,.6);border-radius:2px;"></div></div>
+                        </div>
+                        <div>
+                          <div style="display:flex;justify-content:space-between;margin-bottom:2px;"><span style="font-size:8px;color:var(--cream);">Casal</span><span style="font-size:8px;color:var(--muted);">R$7.800</span></div>
+                          <div style="height:4px;background:rgba(204,63,55,.15);border-radius:2px;"><div style="width:36%;height:100%;background:rgba(128,75,73,.5);border-radius:2px;"></div></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /screen-list -->
+    </div><!-- /container -->
+  </section>
+
+  <!-- ══ PRODUTO 02 ══ -->
+  <div class="product-section">
+    <div class="container">
+      <div class="product-num-bg" style="left:40px;right:auto;">02</div>
+
+      <div class="product-layout reverse reveal">
+        <div>
+          <div class="product-badge">Produto 02</div>
+          <h2 class="product-title">App de Conteúdo<br>com Assinatura</h2>
+          <p class="product-desc">
+            Uma plataforma exclusiva com a sua marca, onde a sua comunidade de fotógrafos acessa conteúdo premium como dicas, técnicas, ebooks e mentorias gravadas, com recorrência via assinatura mensal ou anual.
+          </p>
+          <ul class="feature-list">
+            <li>Feed de publicações exclusivas: dicas, técnicas, bastidores</li>
+            <li>Biblioteca de ebooks, presets e materiais para download</li>
+            <li>Área de assinantes com acesso controlado por nível</li>
+            <li>Monetização recorrente: plano mensal e plano anual</li>
+            <li>Notificações push ao publicar novo conteúdo</li>
+            <li>Painel admin para você publicar de forma autônoma</li>
+            <li>Integração com gateway de pagamento (Stripe, Mercado Pago, ASAAS, ou outra)</li>
+          </ul>
+        </div>
+
+        <!-- MOBILE MOCKUPS -->
+        <div class="mobile-pair">
+          <!-- Feed -->
+          <div class="mobile-frame" style="margin-bottom:30px;">
+            <div class="mobile-notch"></div>
+            <div class="mobile-screen">
+              <div class="s-header" style="margin-bottom:8px;">
+                <div class="dot" style="width:14px;height:14px;border-radius:50%;background:rgba(204,63,55,.4);"></div>
+                <div class="line" style="flex:1;height:3px;background:rgba(245,229,228,.1);border-radius:2px;"></div>
+              </div>
+              <div class="s-card">
+                <div class="s-card-img" style="height:52px;font-size:20px;opacity:.4;">📸</div>
+                <div class="s-card-line" style="width:90%;"></div>
+                <div class="s-card-line" style="width:65%;"></div>
+              </div>
+              <div class="s-card" style="background:rgba(128,39,34,.1);border-color:rgba(128,39,34,.22);">
+                <div class="s-card-img" style="height:42px;font-size:18px;opacity:.4;">🎓</div>
+                <div class="s-card-line" style="width:80%;"></div>
+                <div class="s-card-line" style="width:55%;"></div>
+              </div>
+              <div class="s-badge">
+                <div class="dot2"></div>
+                <div class="lx"></div>
+                <div class="btn-s"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Biblioteca -->
+          <div class="mobile-frame">
+            <div class="mobile-notch"></div>
+            <div class="mobile-screen">
+              <div class="s-header" style="justify-content:center;margin-bottom:10px;">
+                <div class="line" style="width:50%;height:3px;background:rgba(245,229,228,.2);border-radius:2px;margin:0 auto;"></div>
+              </div>
+              <div class="s-grid">
+                <div class="s-grid-item"><div style="font-size:17px;opacity:.45;">📖</div><div style="height:3px;background:rgba(245,229,228,.15);border-radius:2px;width:70%;"></div></div>
+                <div class="s-grid-item" style="background:rgba(128,39,34,.1);border-color:rgba(128,39,34,.2);"><div style="font-size:17px;opacity:.45;">🎬</div><div style="height:3px;background:rgba(245,229,228,.1);border-radius:2px;width:60%;"></div></div>
+                <div class="s-grid-item" style="background:rgba(77,45,44,.2);border-color:rgba(77,45,44,.3);"><div style="font-size:17px;opacity:.45;">🎨</div><div style="height:3px;background:rgba(245,229,228,.1);border-radius:2px;width:65%;"></div></div>
+                <div class="s-grid-item"><div style="font-size:17px;opacity:.45;">⭐</div><div style="height:3px;background:rgba(245,229,228,.1);border-radius:2px;width:55%;"></div></div>
+              </div>
+              <div style="background:linear-gradient(90deg,rgba(204,63,55,.2),rgba(128,39,34,.16));border:1px solid rgba(204,63,55,.28);border-radius:6px;padding:9px;text-align:center;">
+                <div style="height:4px;background:rgba(245,229,228,.22);border-radius:2px;width:60%;margin:0 auto 5px;"></div>
+                <div style="height:3px;background:rgba(245,229,228,.1);border-radius:2px;width:40%;margin:0 auto;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIFERENCIAIS PRODUTO 02 -->
+      <div class="diff-section reveal">
+        <div class="diff-section-title">Diferenciais do App</div>
+        <div class="diff-grid">
+          <div class="diff-card">
+            <div class="diff-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <div class="diff-title">Sua Marca Exclusiva</div>
+            <div class="diff-desc">O app terá o seu nome, sua logo e sua identidade.</div>
+          </div>
+          <div class="diff-card">
+            <div class="diff-icon-wrap">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="diff-title">Receita Recorrente</div>
+            <div class="diff-desc">Assinatura mensal e anual com pagamento automático. Você constrói uma base de renda previsível além dos cachês de sessões.</div>
+          </div>
+          <div class="diff-card">
+            <div class="diff-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="diff-title">Comunidade Exclusiva</div>
+            <div class="diff-desc">Reúne fotógrafos que já passaram pelas suas mentorias em um ambiente privado e de alto valor percebido.</div>
+          </div>
+          <div class="diff-card">
+            <div class="diff-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            </div>
+            <div class="diff-title">Notificações Push</div>
+            <div class="diff-desc">Cada novo conteúdo publicado gera notificação automática para os assinantes.</div>
+          </div>
+          <div class="diff-card">
+            <div class="diff-icon-wrap">
+              <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div class="diff-title">Controle de Acesso por Nível</div>
+            <div class="diff-desc">Conteúdos gratuitos, intermediários e premium separados por camada. Você controla o que cada assinante pode ver.</div>
+          </div>
+          <div class="diff-card">
+            <div class="diff-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </div>
+            <div class="diff-title">Painel Admin Autônomo</div>
+            <div class="diff-desc">Interface simples para você publicar dicas, ebooks, vídeos ou qualquer outra coisa de forma autônoma.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ DEMO APP ══ -->
+  <section class="demo-section" style="background:rgba(0,0,0,.18);">
+    <div class="container">
+      <div class="demo-intro reveal">
+        <span class="sec-label">Produto 02 · Prévia</span>
+        <h2 class="sec-title">A experiência dos<br><em>seus alunos</em></h2>
+        <p class="sec-sub" style="margin:0 auto;">Cada tela do aplicativo já mapeada. (Também pode ser alterada).</p>
+      </div>
+
+      <!-- 6 phones in a scrollable row -->
+      <div class="phone-scroll reveal" style="margin-top:48px;padding:10px 4px 16px;">
+
+        <!-- Phone 01: Login -->
+        <div class="phone-col">
+          <div class="phone-box">
+            <div class="ph-island-wrap"><div class="ph-island"></div></div>
+            <div class="ph-screen">
+              <div class="ph-logo-row">
+                <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;border:2px solid rgba(204,63,55,.45);box-shadow:0 0 18px rgba(204,63,55,.25);flex-shrink:0;">
+                  <img src="data:image/jpeg;base64,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" alt="Juliana Brandão" style="width:100%;height:100%;object-fit:cover;">
+                </div>
+                <div class="ph-brand">Juliana Brandão</div>
+                <div class="ph-brand-sub">Fotografia & Educação</div>
+              </div>
+              <div style="padding:0 4px;">
+                <div class="ph-field">
+                  <svg style="width:10px;height:10px;stroke:var(--muted);fill:none;stroke-width:1.8;stroke-linecap:round;" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  <span class="ph-field-label">E-mail</span>
+                </div>
+                <div class="ph-field">
+                  <svg style="width:10px;height:10px;stroke:var(--muted);fill:none;stroke-width:1.8;stroke-linecap:round;" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  <span class="ph-field-label">Senha</span>
+                </div>
+                <div class="ph-btn-full">Entrar</div>
+                <div style="text-align:center;margin-top:8px;font-size:8.5px;color:var(--muted);">Esqueci minha senha</div>
+                <div style="margin-top:16px;text-align:center;">
+                  <div style="font-size:8px;color:var(--muted);margin-bottom:6px;">Ainda não é aluna?</div>
+                  <div style="border:1px solid rgba(204,63,55,.3);border-radius:7px;padding:7px;text-align:center;font-size:10px;font-weight:600;color:var(--wine);">Conhecer os planos</div>
+                </div>
+              </div>
+            </div>
+            <div class="ph-bottom-nav">
+              <div class="ph-nav-item active"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+              <div class="ph-nav-item"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+              <div class="ph-nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+            </div>
+          </div>
+          <div class="phone-lbl">01 · Login</div>
+        </div>
+
+        <!-- Phone 02: Home -->
+        <div class="phone-col">
+          <div class="phone-box">
+            <div class="ph-island-wrap"><div class="ph-island"></div></div>
+            <div class="ph-screen">
+              <div class="ph-topbar">
+                <div>
+                  <div class="ph-sub">Olá, Marina</div>
+                  <div class="ph-title">Início</div>
+                </div>
+                <div class="ph-avatar">MS</div>
+              </div>
+              <div class="ph-section-label">Em Destaque</div>
+              <div class="ph-card">
+                <div class="ph-card-img"><div class="ph-card-play"></div></div>
+                <div class="ph-card-title">Como precificar seus ensaios em 2025</div>
+                <div class="ph-card-sub">Juliana Brandão · 38 min</div>
+              </div>
+              <div class="ph-section-label" style="margin-top:6px;">Últimas Aulas</div>
+              <div class="ph-course-row">
+                <div class="ph-course-thumb"></div>
+                <div><div class="ph-course-name">Lightroom do Zero</div><div class="ph-course-sub">Edição · 12 aulas</div></div>
+              </div>
+              <div class="ph-course-row">
+                <div class="ph-course-thumb" style="background:rgba(128,39,34,.25);"></div>
+                <div><div class="ph-course-name">Edição Moody</div><div class="ph-course-sub">Edição · 8 aulas</div></div>
+              </div>
+              <div class="ph-course-row" style="border-bottom:none;">
+                <div class="ph-course-thumb" style="background:rgba(128,75,73,.25);"></div>
+                <div><div class="ph-course-name">Direção de Pose Família</div><div class="ph-course-sub">Pose · 6 aulas</div></div>
+              </div>
+            </div>
+            <div class="ph-bottom-nav">
+              <div class="ph-nav-item active"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><div class="ph-nav-dot"></div></div>
+              <div class="ph-nav-item"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+              <div class="ph-nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+            </div>
+          </div>
+          <div class="phone-lbl">02 · Home</div>
+        </div>
+
+        <!-- Phone 03: Biblioteca -->
+        <div class="phone-col">
+          <div class="phone-box">
+            <div class="ph-island-wrap"><div class="ph-island"></div></div>
+            <div class="ph-screen">
+              <div class="ph-topbar">
+                <div class="ph-title">Biblioteca</div>
+                <svg style="width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:1.8;stroke-linecap:round;" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </div>
+              <div class="ph-section-label">Categorias</div>
+              <div class="ph-cat-row">
+                <div class="ph-cat active">Edição</div>
+                <div class="ph-cat">Direção</div>
+                <div class="ph-cat">Marketing</div>
+                <div class="ph-cat">Negócios</div>
+                <div class="ph-cat">Equipamentos</div>
+              </div>
+              <div class="ph-section-label">Cursos · Edição</div>
+              <div class="ph-course-row">
+                <div class="ph-course-thumb"></div>
+                <div><div class="ph-course-name">Lightroom do Zero</div><div class="ph-course-sub">12 aulas · 4h30</div></div>
+              </div>
+              <div class="ph-course-row">
+                <div class="ph-course-thumb" style="background:rgba(128,39,34,.25);"></div>
+                <div><div class="ph-course-name">Edição Moody</div><div class="ph-course-sub">8 aulas · 2h15</div></div>
+              </div>
+              <div class="ph-course-row">
+                <div class="ph-course-thumb" style="background:rgba(128,75,73,.25);"></div>
+                <div><div class="ph-course-name">Tons de Pele no LR</div><div class="ph-course-sub">5 aulas · 1h40</div></div>
+              </div>
+              <div class="ph-course-row" style="border-bottom:none;">
+                <div class="ph-course-thumb" style="background:rgba(77,45,44,.4);"></div>
+                <div><div class="ph-course-name">Exportação para Entrega</div><div class="ph-course-sub">3 aulas · 55 min</div></div>
+              </div>
+            </div>
+            <div class="ph-bottom-nav">
+              <div class="ph-nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+              <div class="ph-nav-item active"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><div class="ph-nav-dot"></div></div>
+              <div class="ph-nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+            </div>
+          </div>
+          <div class="phone-lbl">03 · Biblioteca</div>
+        </div>
+
+        <!-- Phone 04: Aula -->
+        <div class="phone-col">
+          <div class="phone-box">
+            <div class="ph-island-wrap"><div class="ph-island"></div></div>
+            <div class="ph-screen">
+              <div class="ph-video-player">
+                <div class="ph-video-bg"></div>
+                <div class="ph-play-btn"></div>
+              </div>
+              <div style="margin-bottom:6px;">
+                <div style="font-size:11px;font-weight:700;color:var(--white);margin-bottom:2px;">Lightroom do Zero</div>
+                <div style="font-size:8.5px;color:var(--muted);">Aula 1 de 12 · 22 min</div>
+              </div>
+              <div style="display:flex;gap:4px;margin-bottom:8px;">
+                <div style="font-size:8px;background:rgba(204,63,55,.12);border:1px solid rgba(204,63,55,.22);border-radius:3px;padding:2px 6px;color:var(--wine);">Edição</div>
+                <div style="font-size:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:2px 6px;color:var(--muted);">Iniciante</div>
+              </div>
+              <div style="font-size:8.5px;color:var(--muted);line-height:1.5;margin-bottom:8px;">Nesta aula você vai entender a interface do Lightroom e criar o seu primeiro perfil de edição do zero.</div>
+              <div class="ph-section-label">Comentários</div>
+              <div class="ph-post" style="margin-bottom:5px;">
+                <div class="ph-post-head">
+                  <div class="ph-avatar" style="width:16px;height:16px;font-size:7px;">CR</div>
+                  <div>
+                    <div class="ph-post-name">Camila Rocha</div>
+                  </div>
+                </div>
+                <div class="ph-post-text">Amei essa aula! Finalmente entendi as máscaras de luminância</div>
+              </div>
+            </div>
+            <div class="ph-bottom-nav">
+              <div class="ph-nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+              <div class="ph-nav-item active"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><div class="ph-nav-dot"></div></div>
+              <div class="ph-nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+            </div>
+          </div>
+          <div class="phone-lbl">04 · Aula</div>
+        </div>
+
+        <!-- Phone 05: Comunidade -->
+        <div class="phone-col">
+          <div class="phone-box">
+            <div class="ph-island-wrap"><div class="ph-island"></div></div>
+            <div class="ph-screen">
+              <div class="ph-topbar">
+                <div class="ph-title">Comunidade</div>
+                <svg style="width:14px;height:14px;stroke:var(--wine);fill:none;stroke-width:1.8;stroke-linecap:round;" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </div>
+              <div class="ph-post">
+                <div class="ph-post-head">
+                  <div class="ph-avatar">JB</div>
+                  <div>
+                    <div class="ph-post-name">Juliana Brandão</div>
+                    <div class="ph-post-time">Hoje · 09h00</div>
+                  </div>
+                </div>
+                <div class="ph-post-text">Nova aula no ar! Edição Moody completa com 8 vídeos. Aproveita e me conta nos comentários</div>
+                <div style="margin-top:5px;display:flex;gap:8px;"><span style="font-size:8px;color:var(--wine);">❤ 24</span><span style="font-size:8px;color:var(--muted);">💬 8 respostas</span></div>
+              </div>
+              <div class="ph-post">
+                <div class="ph-post-head">
+                  <div class="ph-avatar" style="background:#802722;">MS</div>
+                  <div>
+                    <div class="ph-post-name">Marina Silva</div>
+                    <div class="ph-post-time">Há 2h</div>
+                  </div>
+                </div>
+                <div class="ph-post-text">Gente, alguém já usou a técnica de direção de pose da aula 3 em ensaio de família?</div>
+                <div style="margin-top:5px;display:flex;gap:8px;"><span style="font-size:8px;color:var(--wine);">❤ 11</span><span style="font-size:8px;color:var(--muted);">💬 5 respostas</span></div>
+              </div>
+              <div class="ph-post" style="margin-bottom:0;">
+                <div class="ph-post-head">
+                  <div class="ph-avatar" style="background:#4D2D2C;">AP</div>
+                  <div>
+                    <div class="ph-post-name">Ana Paula Mendes</div>
+                    <div class="ph-post-time">Há 4h</div>
+                  </div>
+                </div>
+                <div class="ph-post-text">Meu primeiro preset personalizado usando o que aprendi aqui! Obrigada Ju</div>
+              </div>
+            </div>
+            <div class="ph-bottom-nav">
+              <div class="ph-nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+              <div class="ph-nav-item"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+              <div class="ph-nav-item active"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><div class="ph-nav-dot"></div></div>
+            </div>
+          </div>
+          <div class="phone-lbl">05 · Comunidade</div>
+        </div>
+
+        <!-- Phone 06: Perfil -->
+        <div class="phone-col">
+          <div class="phone-box">
+            <div class="ph-island-wrap"><div class="ph-island"></div></div>
+            <div class="ph-screen">
+              <div class="ph-topbar">
+                <div class="ph-title">Perfil</div>
+                <svg style="width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:1.8;stroke-linecap:round;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              </div>
+              <div class="ph-profile-top">
+                <div class="ph-profile-av">MS</div>
+                <div class="ph-profile-name">Marina Silva</div>
+                <div class="ph-plan-badge">Plano Premium · R$79,90/mês</div>
+              </div>
+              <div style="background:rgba(204,63,55,.06);border:1px solid rgba(204,63,55,.12);border-radius:7px;padding:8px;margin-bottom:8px;">
+                <div style="font-size:8px;color:var(--muted);margin-bottom:5px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;">Meu Progresso</div>
+                <div style="display:flex;gap:12px;">
+                  <div style="text-align:center;"><div style="font-size:14px;font-weight:700;color:var(--wine);">12</div><div style="font-size:7.5px;color:var(--muted);">Aulas</div></div>
+                  <div style="text-align:center;"><div style="font-size:14px;font-weight:700;color:var(--wine);">3</div><div style="font-size:7.5px;color:var(--muted);">Cursos</div></div>
+                  <div style="text-align:center;"><div style="font-size:14px;font-weight:700;color:var(--wine);">48h</div><div style="font-size:7.5px;color:var(--muted);">Assistidas</div></div>
+                </div>
+              </div>
+              <div class="ph-setting-row">
+                <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/></svg>
+                <div class="ph-setting-text">Meu plano e faturas</div>
+                <div class="ph-setting-arr">›</div>
+              </div>
+              <div class="ph-setting-row">
+                <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
+                <div class="ph-setting-text">Notificações</div>
+                <div class="ph-setting-arr">›</div>
+              </div>
+              <div class="ph-setting-row" style="border-bottom:none;">
+                <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                <div class="ph-setting-text" style="color:rgba(204,63,55,.7);">Sair</div>
+                <div class="ph-setting-arr">›</div>
+              </div>
+            </div>
+            <div class="ph-bottom-nav">
+              <div class="ph-nav-item"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+              <div class="ph-nav-item"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+              <div class="ph-nav-item active"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><div class="ph-nav-dot"></div></div>
+            </div>
+          </div>
+          <div class="phone-lbl">06 · Perfil</div>
+        </div>
+
+      </div><!-- /phone-scroll -->
+    </div><!-- /container -->
+  </section>
+
+  <!-- ══ PRÓXIMOS PASSOS ══ -->
+  <section style="padding:100px 0 120px;">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:64px;" class="reveal">
+        <span class="sec-label">O que achou?</span>
+        <h2 class="sec-title">Quando você quiser,<br><em>eu dou o play</em></h2>
+      </div>
+
+      <!-- Steps -->
+      <div style="display:flex;gap:0;max-width:720px;margin:0 auto 64px;position:relative;" class="reveal">
+        <div style="position:absolute;top:22px;left:calc(16.6% + 10px);right:calc(16.6% + 10px);height:1px;background:linear-gradient(90deg,var(--wine),rgba(204,63,55,.3),var(--wine));"></div>
+
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:0 12px;">
+          <div style="width:44px;height:44px;border-radius:50%;background:var(--wine);border:2px solid rgba(204,63,55,.4);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;font-family:'Playfair Display',serif;position:relative;z-index:1;box-shadow:0 0 20px rgba(204,63,55,.35);">1</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--white);margin-bottom:5px;">Reunião de<br>Alinhamento</div>
+            <div style="font-size:11.5px;color:var(--muted);line-height:1.5;">Conversa rápida para entender as suas prioridades e tirar dúvidas</div>
+          </div>
+        </div>
+
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:0 12px;">
+          <div style="width:44px;height:44px;border-radius:50%;background:rgba(204,63,55,.12);border:1.5px solid rgba(204,63,55,.3);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--wine);font-family:'Playfair Display',serif;position:relative;z-index:1;">2</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--white);margin-bottom:5px;">Proposta de<br>Investimento</div>
+            <div style="font-size:11.5px;color:var(--muted);line-height:1.5;">Valores e formas de pagamento</div>
+          </div>
+        </div>
+
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:0 12px;">
+          <div style="width:44px;height:44px;border-radius:50%;background:rgba(204,63,55,.12);border:1.5px solid rgba(204,63,55,.3);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--wine);font-family:'Playfair Display',serif;position:relative;z-index:1;">3</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--white);margin-bottom:5px;">Início<br>Faseado</div>
+            <div style="font-size:11.5px;color:var(--muted);line-height:1.5;">Se aprovado, eu começo pelo o que que fizer mais sentido pra ti</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- /page -->
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 70);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
